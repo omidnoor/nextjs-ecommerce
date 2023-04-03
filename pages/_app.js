@@ -10,16 +10,22 @@ let persistor = persistStore(store);
 
 export default function App({ Component, pageProps }) {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Head>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
-        <Component {...pageProps} />
-      </PersistGate>
-    </Provider>
+    <>
+      <Head>
+        <title>Shoppay</title>
+        <meta name="description" content="Online shooping service" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Component {...pageProps} />
+        </PersistGate>
+      </Provider>
+    </>
   );
 }
