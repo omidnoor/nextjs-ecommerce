@@ -141,6 +141,7 @@
 
   ul {
     li {
+      cursor: pointer;
       height: 30px;
 
       a {
@@ -168,6 +169,7 @@
         font-size: 14px;
         color: $blue-color;
         text-decoration: underline;
+        cursor: pointer;
       }
     }
   }
