@@ -45,10 +45,6 @@ export default function UserMenu({ loggedIn }) {
         <li>
           <Link href="/profile/wishlist">Whishlist</Link>
         </li>
-
-        <li>
-          <Link href=""></Link>
-        </li>
       </ul>
     </div>
   );
