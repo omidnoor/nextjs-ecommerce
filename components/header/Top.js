@@ -8,7 +8,7 @@ import { RiAccountPinCircleLine, RiArrowDropDownFill } from "react-icons/ri";
 import styles from "./styles.module.scss";
 import UserMenu from "./UserMenu";
 
-export default function Top() {
+export default function Top({ country }) {
   const [loggedIn, setLoggedIn] = useState(true);
   const [visible, setVisible] = useState(false);
 
@@ -18,7 +18,7 @@ export default function Top() {
         <div></div>
         <ul className={styles.top__list}>
           <li className={styles.li}>
-            <img src="../images/canada-flag.png" alt="flag" />
+            <img src={country.flag} alt={country.name} />
             <span>Canada / CAD</span>
           </li>
 

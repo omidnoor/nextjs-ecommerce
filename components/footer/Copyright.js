@@ -27,21 +27,21 @@ const data = [
   },
 ];
 
-export default function Copyright() {
+export default function Copyright({ country }) {
   return (
     <div className={styles.footer__copyright}>
       <section>&copy;2023 SHOPPAY ALL RIGHT RESERVED.</section>
       <section>
         <ul>
           {data.map((link) => (
-            <li>
+            <li key={link.name}>
               <Link href={link.link}>{link.name}</Link>
             </li>
           ))}
 
           <li>
             <a href="">
-              <IoLocationSharp /> Canada
+              <IoLocationSharp /> {country.name}
             </a>
           </li>
         </ul>

@@ -8,7 +8,6 @@ import styles from "./styles.module.scss";
 
 export default function Main() {
   const { cart } = useSelector((state) => ({ ...state }));
-  console.log(cart.items);
 
   return (
     <div className={styles.main}>
