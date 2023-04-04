@@ -25,4 +25,14 @@ export default NextAuth({
     //   from: "NextAuth.js <no-reply@example.com>",
     // }),
   ],
+
+  pages: {
+    signIn: "/signin",
+  },
+
+  session: {
+    strategy: "jwt",
+  },
+
+  secret: process.env.JWT_SECRET,
 });
