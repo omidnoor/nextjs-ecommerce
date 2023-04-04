@@ -1,6 +1,9 @@
+import Copyright from "./Copyright";
 import Links from "./Links";
 import NewsLetter from "./NewsLetter";
+import Payment from "./Payment";
 import Socials from "./Socials";
+
 import styles from "./styles.module.scss";
 
 export default function Footer() {
@@ -10,6 +13,8 @@ export default function Footer() {
         <Links />
         <Socials />
         <NewsLetter />
+        <Payment />
+        <Copyright />
       </div>
     </div>
   );
