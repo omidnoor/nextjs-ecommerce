@@ -2,9 +2,14 @@ import NextAuth from "next-auth";
 import AppleProvider from "next-auth/providers/apple";
 import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 // import EmailProvider from "next-auth/providers/email";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import clientPromise from "./lib/mongodb";
 
 export default NextAuth({
+  adapter: MongoDBAdapter(clientPromise),
+
   providers: [
     // OAuth authentication providers...
     AppleProvider({
@@ -19,6 +24,10 @@ export default NextAuth({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
     // Passwordless / email sign in
     // EmailProvider({
     //   server: process.env.MAIL_SERVER,
@@ -27,7 +36,7 @@ export default NextAuth({
   ],
 
   pages: {
-    signIn: "/signin",
+    // signIn: "/signin",
   },
 
   session: {
