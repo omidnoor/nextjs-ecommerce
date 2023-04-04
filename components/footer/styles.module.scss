@@ -28,6 +28,10 @@
     ul {
       padding: 5px;
 
+      b {
+        text-transform: uppercase;
+      }
+
       li {
         font-size: 12px;
 
@@ -37,6 +41,32 @@
 
           &:hover {
             text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  &__socials {
+    section {
+      h3 {
+        font-size: 12px;
+        font-weight: 700;
+        color: #222;
+      }
+
+      ul {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        li {
+          font-size: 2rem;
+          color: #333;
+
+          &:hover {
+            color: $blue-color;
           }
         }
       }
