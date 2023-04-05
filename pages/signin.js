@@ -10,13 +10,14 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 import styles from "../styles/signin.module.scss";
 import LoginInput from "@/components/inputs/loginInput";
 import CircledIconBtn from "@/components/buttons/circledIconBtn";
+import { getProviders, signIn } from "next-auth/react";
 
 const initialValues = {
   login_email: "",
   login_password: "",
 };
 
-export default function signin() {
+export default function signin({ providers }) {
   const [user, setUser] = useState(initialValues);
   const { login_email, login_password } = user;
 
@@ -82,10 +83,36 @@ export default function signin() {
                 </Form>
               )}
             </Formik>
+            <div className={styles.login__socials}>
+              <span className={styles.or}>Or continue with</span>
+              <div className={styles.login__socials_wrap}>
+                {providers.map((provider) => (
+                  <div key={provider.name}>
+                    <button
+                      className={styles.social__btn}
+                      onClick={() => signIn(provider.id)}
+                    >
+                      <img src={`../../icons/${provider.name}.png`} alt="" />
+                      Sign in with {provider.name}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <Footer country="Canada" />
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const providers = Object.values(await getProviders());
+
+  return {
+    props: {
+      providers,
+    },
+  };
 }
