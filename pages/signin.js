@@ -15,11 +15,16 @@ import { getProviders, signIn } from "next-auth/react";
 const initialValues = {
   login_email: "",
   login_password: "",
+  name: "",
+  email: "",
+  password: "",
+  conf_password: "",
 };
 
 export default function signin({ providers }) {
   const [user, setUser] = useState(initialValues);
-  const { login_email, login_password } = user;
+  const { login_email, login_password, name, email, password, conf_password } =
+    user;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,10 +38,29 @@ export default function signin({ providers }) {
     login_password: Yup.string().required("Password is required"),
   });
 
+  const registerValidation = Yup.object({
+    name: Yup.string()
+      .required("Name is required")
+      .min(2, "Too short - min 2 characters")
+      .max(16, "Too long - max 16 characters")
+      .matches(/^[aA-zZ]/, "Numbers and special characters are not allowed"),
+    email: Yup.string().required("Email is required").email("Invalid email"),
+    password: Yup.string()
+      .required(
+        "Enter a combination of at least six numbers, letters and punctuation marks(such as ! and &)",
+      )
+      .min(6, "Too short - min 6 characters")
+      .max(36, "Too long - max 36 characters"),
+    conf_password: Yup.string()
+      .required("Confirm your password")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
+  });
+
   return (
     <>
       <Header country="Canada" />
       <div className={styles.login}>
+        {/* login container */}
         <div className={styles.login__container}>
           <div className={styles.login__header}>
             <div className={styles.back__svg}>
@@ -99,6 +123,61 @@ export default function signin({ providers }) {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* sign up container */}
+        <div className={styles.login__container}>
+          <div className={styles.login__form}>
+            <h1>Sign up</h1>
+            <p>Get access to one of teh best Eshopping services.</p>
+            <Formik
+              enableReinitialize
+              initialValues={{
+                name,
+                email,
+                password,
+                conf_password,
+              }}
+              validationSchema={registerValidation}
+            >
+              {(form) => (
+                <Form>
+                  <LoginInput
+                    type="text"
+                    name="name"
+                    icon="user"
+                    placeholder="Full Name"
+                    onChange={handleChange}
+                  />
+
+                  <LoginInput
+                    type="text"
+                    name="email"
+                    icon="email"
+                    placeholder="Email Address"
+                    onChange={handleChange}
+                  />
+
+                  <LoginInput
+                    type="password"
+                    name="password"
+                    icon="password"
+                    placeholder="Password"
+                    onChange={handleChange}
+                  />
+
+                  <LoginInput
+                    type="password"
+                    name="conf_password"
+                    icon="password"
+                    placeholder="Re-Type Password"
+                    onChange={handleChange}
+                  />
+                  <CircledIconBtn type="submit" text="Sign up" />
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>
