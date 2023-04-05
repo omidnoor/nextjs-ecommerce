@@ -1,0 +1,35 @@
+.input {
+  position: relative;
+  max-width: 380px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 55px;
+  display: grid;
+  grid-template-columns: 15% auto;
+  align-items: center;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+
+  svg {
+    width: 25px;
+    height: 25px;
+    stroke: #6666669a;
+    fill: #6666669a;
+  }
+
+  input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    line-height: 1;
+    font-size: 1.1rem;
+    color: #333;
+
+    &::placeholder {
+      color: #aaa;
+      font-weight: 500;
+    }
+  }
+}
