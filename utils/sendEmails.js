@@ -1,6 +1,8 @@
 import nodemailer from "nodemailer";
 import { google } from "googleapis";
 
+import { activateEmailTemplate } from "../emails/activateEmailTemplate";
+
 const { OAuth2 } = google.auth;
 
 const OAUTH_PLAYGROUND = "https://developers.google.com/oauthplayground";
@@ -41,11 +43,14 @@ export const sendEmail = (to, url, txt, subject) => {
     from: SENDER_EMAIL_ADDRESS,
     to: to,
     subject: subject,
-    text: `Please click on the following link to verify your email address: ${url}`,
+    html: activateEmailTemplate(to, url),
   };
 
   smtpTransport.sendMail(mailOptions, (error, info) => {
-    if (err) return err;
-    return info;
+    if (error) {
+      console.error("Error sending email:", error);
+      return;
+    }
+    console.log("Email sent:", info);
   });
 };
