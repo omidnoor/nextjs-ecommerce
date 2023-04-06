@@ -7,7 +7,6 @@ import styles from "@/styles/Home.module.scss";
 
 export default function Home({ country }) {
   const { data: session } = useSession();
-  console.log(session);
 
   return (
     <div className="">
@@ -29,7 +28,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       // country: { name: data.name, flag: data.flag.emojitwo },
-      country: { name: "Canada", flag: "../images/canada-flag.png" },
+      country: { name: "Canada", flag: "/images/canada-flag.png" },
     },
   };
 }
