@@ -21,9 +21,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "user",
     },
-    imgae: {
+    image: {
       type: String,
-      default: "@/images/default/default-user.png",
+      default: "/images/default/default-user.png",
     },
     emailVerified: {
       type: Boolean,

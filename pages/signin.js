@@ -24,6 +24,7 @@ const initialValues = {
   conf_password: "",
   success: "",
   error: "",
+  login_error: "",
 };
 
 export default function signin({ providers }) {
@@ -38,6 +39,7 @@ export default function signin({ providers }) {
     conf_password,
     success,
     error,
+    login_error,
   } = user;
 
   const handleChange = (e) => {
@@ -70,6 +72,29 @@ export default function signin({ providers }) {
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
 
+  const signInHandler = async (e) => {
+    setLoading(true);
+
+    const options = {
+      redirect: false,
+      email: login_email,
+      password: login_password,
+    };
+
+    const res = await signIn("credentials", options);
+
+    setUser({ ...user, success: "", error: "" });
+
+    setLoading(false);
+
+    if (res?.error) {
+      setLoading(false);
+      setUser({ ...user, login_error: res?.error });
+    } else {
+      return Router.push("/");
+    }
+  };
+
   const signUpHandler = async () => {
     try {
       setLoading(true);
@@ -81,9 +106,17 @@ export default function signin({ providers }) {
 
       setUser({ ...user, error: "", success: data.message });
       setLoading(false);
-      setTimeout(() => {
+
+      setTimeout(async () => {
+        const options = {
+          redirect: false,
+          email: email,
+          password: password,
+        };
+
+        const res = await signIn("credentials", options);
         Router.push("/");
-      }, 2000);
+      }, 1000);
     } catch (error) {
       setLoading(false);
       setUser({ ...user, suucess: "", error: error.response.data.message });
@@ -116,6 +149,7 @@ export default function signin({ providers }) {
                 login_password,
               }}
               validationSchema={loginValidation}
+              onSubmit={() => signInHandler()}
             >
               {(form) => (
                 <Form>
@@ -136,6 +170,9 @@ export default function signin({ providers }) {
                   />
                   <CircledIconBtn type="submit" text="Sign in" />
 
+                  {login_error && (
+                    <span className={styles.error}>{login_error}</span>
+                  )}
                   <div className={styles.forgot}>
                     <Link href="/forget">Forget password?</Link>
                   </div>
@@ -165,7 +202,7 @@ export default function signin({ providers }) {
         <div className={styles.login__container}>
           <div className={styles.login__form}>
             <h1>Sign up</h1>
-            <p>Get access to one of teh best Eshopping services.</p>
+            <p>Get access to one of the best Eshopping services.</p>
             <Formik
               enableReinitialize
               initialValues={{
