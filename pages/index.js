@@ -12,7 +12,7 @@ export default function Home({ country }) {
   return (
     <div className="">
       <Header country={country} />
-      {session ? <p>loggedin</p> : <p>not logged in</p>}
+
       <Footer country={country} />
     </div>
   );
