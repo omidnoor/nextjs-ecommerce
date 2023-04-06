@@ -4,6 +4,7 @@ import Header from "@/components/header";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
+import Router from "next/router";
 
 import { BiLeftArrowAlt } from "react-icons/bi";
 
@@ -12,6 +13,7 @@ import LoginInput from "@/components/inputs/loginInput";
 import CircledIconBtn from "@/components/buttons/circledIconBtn";
 import { getProviders, signIn } from "next-auth/react";
 import axios from "axios";
+import RingLoaderSpinner from "@/components/loaders/ringloader";
 
 const initialValues = {
   login_email: "",
@@ -79,6 +81,9 @@ export default function signin({ providers }) {
 
       setUser({ ...user, error: "", success: data.message });
       setLoading(false);
+      setTimeout(() => {
+        Router.push("/");
+      }, 2000);
     } catch (error) {
       setLoading(false);
       setUser({ ...user, suucess: "", error: error.response.data.message });
@@ -87,6 +92,7 @@ export default function signin({ providers }) {
 
   return (
     <>
+      {loading && <RingLoaderSpinner loading={loading} />}
       <Header country="Canada" />
       <div className={styles.login}>
         {/* login container */}
@@ -208,8 +214,10 @@ export default function signin({ providers }) {
                 </Form>
               )}
             </Formik>
-            <div className="">{error && <span>{error}</span>}</div>
-            <div className="">{success && <span>{success}</span>}</div>
+            <div className={styles.error}>{error && <span>{error}</span>}</div>
+            <div className={styles.success}>
+              {success && <span>{success}</span>}
+            </div>
           </div>
         </div>
       </div>
