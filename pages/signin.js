@@ -11,6 +11,7 @@ import styles from "../styles/signin.module.scss";
 import LoginInput from "@/components/inputs/loginInput";
 import CircledIconBtn from "@/components/buttons/circledIconBtn";
 import { getProviders, signIn } from "next-auth/react";
+import axios from "axios";
 
 const initialValues = {
   login_email: "",
@@ -19,12 +20,23 @@ const initialValues = {
   email: "",
   password: "",
   conf_password: "",
+  success: "",
+  error: "",
 };
 
 export default function signin({ providers }) {
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValues);
-  const { login_email, login_password, name, email, password, conf_password } =
-    user;
+  const {
+    login_email,
+    login_password,
+    name,
+    email,
+    password,
+    conf_password,
+    success,
+    error,
+  } = user;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +67,23 @@ export default function signin({ providers }) {
       .required("Confirm your password")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
+
+  const signUpHandler = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/auth/signup", {
+        name,
+        email,
+        password,
+      });
+
+      setUser({ ...user, error: "", success: data.message });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setUser({ ...user, suucess: "", error: error.response.data.message });
+    }
+  };
 
   return (
     <>
@@ -140,6 +169,7 @@ export default function signin({ providers }) {
                 conf_password,
               }}
               validationSchema={registerValidation}
+              onSubmit={() => signUpHandler()}
             >
               {(form) => (
                 <Form>
@@ -178,6 +208,8 @@ export default function signin({ providers }) {
                 </Form>
               )}
             </Formik>
+            <div className="">{error && <span>{error}</span>}</div>
+            <div className="">{success && <span>{success}</span>}</div>
           </div>
         </div>
       </div>
