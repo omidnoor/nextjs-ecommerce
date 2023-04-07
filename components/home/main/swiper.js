@@ -1,12 +1,11 @@
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper";
 
 import styles from "./styles.module.scss";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
-
-import { Autoplay, Pagination, Navigation } from "swiper";
 
 export default function MainSwiper() {
   return (

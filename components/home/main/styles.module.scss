@@ -9,7 +9,7 @@
 
   .menu {
     grid-area: menu;
-    height: 560px;
+    height: 580px;
     background-color: #fff;
     box-shadow: $shadow-1;
     border-radius: 10px;
@@ -36,12 +36,16 @@
     background-color: #fff;
     box-shadow: $shadow-1;
     border-radius: 10px;
-    height: 200px;
+    height: 220px;
+    overflow: hidden;
+    background-image: url("/images/flash.webp");
+    background-size: cover;
+    background-position: -250px -100px;
   }
 
   .user {
     grid-area: user;
-    height: 510px;
+    height: 530px;
     background-color: #fff;
     box-shadow: $shadow-1;
     border-radius: 10px;

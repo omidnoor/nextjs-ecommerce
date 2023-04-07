@@ -1,5 +1,8 @@
 $blue-color: #2f82ff;
 $light-blue-color: #4a8fff;
+$yellow-color: #fac80f;
+$violet-color: #5a31f4;
+$redish-color: #f15f6f;
 $grey-color: #f8f8f8;
 $light-error-color: #fd010169;
 $error-color: #ed4337;
@@ -8,7 +11,7 @@ $success-color: #6cc070;
 $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
 .container {
-  max-width: 1500px;
+  max-width: 1600px;
   margin: 0 auto;
   // background-color: red;
   min-height: 100vh;
@@ -94,7 +97,8 @@ $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
 }
 
-.mainSwiper {
+.mainSwiper,
+.offers_swiper {
   .swiper {
     // border-radius: 10px;
     box-shadow: $shadow-1 !important;
@@ -108,15 +112,16 @@ $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .swiper-pagination-bullet-active {
   width: 10px !important;
+  background-color: #fff !important;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
   color: #ffffff !important;
   transform: scale(0.5) !important;
-  width: 50 !important;
+  width: 50px !important;
   height: 60px !important;
-  transition: 0.2s ease-in-out !important;
+  transition: all 0.2s ease-in-out !important;
   background-color: #66666691;
   padding: 10px !important;
   display: none;
@@ -127,4 +132,54 @@ $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
 .swiper-button-next {
   right: -5px !important;
+}
+
+.offers_swiper {
+  // max-width: 550px;
+  // transform: translateX(33%);
+  .swiper-pagination {
+    display: none;
+  }
+  .swiper-slide {
+    width: 150px !important;
+    height: 90% !important;
+    margin-top: 0.6rem !important;
+    box-shadow: $shadow-1 !important;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transform: scale(1.03) !important;
+    }
+    span {
+      color: #fff;
+      position: absolute;
+      &:first-of-type {
+        bottom: 10px;
+        height: 25px;
+        width: 90px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: $yellow-color;
+      }
+      &:last-of-type {
+        font-style: italic;
+        top: -5px;
+        right: -5px;
+        background-color: $redish-color;
+        height: 40px;
+        width: 40px;
+        z-index: 40;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: $shadow-1;
+      }
+    }
+    a {
+      height: 100% !important;
+      object-fit: cover !important;
+    }
+  }
 }
