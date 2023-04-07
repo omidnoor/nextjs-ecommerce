@@ -140,7 +140,7 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
               <BiLeftArrowAlt />
             </div>
             <span>
-              We'd be happy to join us! <Link href="/">Go to store</Link>{" "}
+              We'd be happy to join us! <Link href="/">Go to store</Link>
             </span>
           </div>
 
@@ -167,7 +167,7 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
                     type="email"
                     name="login_email"
                     icon="email"
-                    placeholder="Email"
+                    placeholder="Email Address"
                     onChange={handleChange}
                   />
 
@@ -184,7 +184,7 @@ export default function signin({ providers, callbackUrl, csrfToken }) {
                     <span className={styles.error}>{login_error}</span>
                   )}
                   <div className={styles.forgot}>
-                    <Link href="/forget">Forget password?</Link>
+                    <Link href="/auth/forgot">Forget password?</Link>
                   </div>
                 </Form>
               )}
@@ -285,7 +285,6 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         destination: callbackUrl,
-        permanent: false,
       },
     };
   }
