@@ -44,15 +44,13 @@ export default function forgot() {
       {loading && <RingLoaderSpinner loading={loading} />}
       <Header country="Canada" />
       <div className={styles.forgot}>
-        <div>
-          <div className={styles.forgot__header}>
-            <div className={styles.back__svg}>
-              <BiLeftArrowAlt />
-            </div>
-            <span>
-              Forgot your password? <Link href="/">Login instead</Link>{" "}
-            </span>
+        <div className={styles.forgot__header}>
+          <div className={styles.back__svg}>
+            <BiLeftArrowAlt />
           </div>
+          <span>
+            Forgot your password? <Link href="/">Login instead</Link>{" "}
+          </span>
         </div>
 
         <div className={styles.forgot__form}>
