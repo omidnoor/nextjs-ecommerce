@@ -6,7 +6,7 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 
-import { Pagination, Navigation } from "swiper";
+import { Autoplay, Pagination, Navigation } from "swiper";
 
 export default function MainSwiper() {
   return (
@@ -18,8 +18,12 @@ export default function MainSwiper() {
         pagination={{
           clickable: true,
         }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         navigation={true}
-        modules={[Pagination, Navigation]}
+        modules={[Autoplay, Pagination, Navigation]}
         className={`${styles.mainSwiper} ${styles.swiper}`}
       >
         {[...Array(10).keys()].map((index) => (
