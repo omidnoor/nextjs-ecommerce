@@ -33,6 +33,8 @@ const initialValues = {
 };
 
 export default function signin({ providers, callbackUrl, csrfToken }) {
+  // console.log(callbackUrl, csrfToken);
+
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValues);
   const {
@@ -281,13 +283,13 @@ export async function getServerSideProps(context) {
   const session = await getSession({ req });
   const { callbackUrl } = query;
 
-  if (session) {
-    return {
-      redirect: {
-        destination: callbackUrl,
-      },
-    };
-  }
+  // if (session) {
+  //   return {
+  //     redirect: {
+  //       destination: callbackUrl,
+  //     },
+  //   };
+  // }
 
   const crsfToken = await getCsrfToken(context);
   const providers = Object.values(await getProviders());

@@ -128,7 +128,7 @@ export async function getServerSideProps(context) {
   }
   const token = query.token;
   const user_id = jwt.verify(token, process.env.RESET_TOKEN_SECRET);
-
+  console.log(user_id);
   return {
     props: {
       user_id: user_id.id,
