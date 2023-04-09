@@ -66,9 +66,19 @@
   .header {
     grid-area: header;
     height: 40px;
-    background-color: #fff;
-    box-shadow: $shadow-1;
-    border-radius: 10px;
+    display: flex;
+    align-items: center;
+
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      li {
+        font-size: 19px;
+        color: $blue-color;
+      }
+    }
   }
 
   .swiper {
@@ -144,9 +154,10 @@
         display: flex;
         align-items: center;
         gap: 1rem;
+        padding: 0 10px;
 
         button {
-          width: 100px;
+          width: 90px;
           height: 35px;
           border-radius: 10px;
           cursor: pointer;

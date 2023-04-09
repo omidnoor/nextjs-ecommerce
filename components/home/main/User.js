@@ -30,7 +30,7 @@ export default function User() {
           </div>
         ) : (
           <div className={styles.user__infos}>
-            <img src="/images/default/default-user.png" alt="default image" />
+            <img src="/images/default/default-user.jpg" alt="default image" />
             <div className={styles.user__infos_btns}>
               <button>Register</button>
               <button>Login</button>
@@ -68,7 +68,8 @@ export default function User() {
             <Swiper
               effect={"cards"}
               grabCursor={true}
-              modules={[EffectCards]}
+              modules={[EffectCards, Navigation]}
+              navigation={true}
               className="userMenu__swiper"
               style={{ maxWidth: "180px", height: "240px", marginTop: "1rem" }}
             >
