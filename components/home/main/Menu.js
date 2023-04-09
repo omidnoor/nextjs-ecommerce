@@ -8,7 +8,7 @@ import {
   GiClothes,
   Gi3DHammer,
   GiWatch,
-  GiBallerinaShoes,
+  GiRunningShoe,
   GiHeadphones,
   GiHealthCapsule,
   GiSportMedal,
@@ -37,37 +37,37 @@ export default function Menu() {
               <Link href={item.link}>
                 {i == 0 ? (
                   <GiLargeDress />
-                ) : i == 1 ? (
+                ) : i === 1 ? (
                   <GiClothes />
-                ) : i == 2 ? (
+                ) : i === 2 ? (
                   <GiHeadphones />
-                ) : i == 3 ? (
+                ) : i === 3 ? (
                   <GiWatch />
-                ) : i == 4 ? (
+                ) : i === 4 ? (
                   <HiOutlineHome />
-                ) : i == 5 ? (
+                ) : i === 5 ? (
                   <GiHealthCapsule />
-                ) : i == 6 ? (
-                  <GiBallerinaShoes />
-                ) : i == 7 ? (
+                ) : i === 6 ? (
+                  <GiRunningShoe />
+                ) : i === 7 ? (
                   <GiBigDiamondRing />
-                ) : i == 8 ? (
+                ) : i === 8 ? (
                   <GiSportMedal />
-                ) : i == 9 ? (
+                ) : i === 9 ? (
                   <FaBaby />
-                ) : i == 10 ? (
+                ) : i === 10 ? (
                   <BiCameraMovie />
-                ) : i == 11 ? (
+                ) : i === 11 ? (
                   <MdOutlineSportsEsports />
-                ) : i == 12 ? (
+                ) : i === 12 ? (
                   <BsPhoneVibrate />
-                ) : i == 13 ? (
+                ) : i === 13 ? (
                   <MdOutlineSmartToy />
-                ) : i == 14 ? (
+                ) : i === 14 ? (
                   <BiGift />
-                ) : i == 15 ? (
+                ) : i === 15 ? (
                   <Gi3DHammer />
-                ) : i == 16 ? (
+                ) : i === 16 ? (
                   <AiOutlineSecurityScan />
                 ) : (
                   ""
