@@ -33,7 +33,7 @@ export default function Menu() {
         </li>
         <div className={styles.menu__list}>
           {menuArray.map((item, i) => (
-            <li>
+            <li key={i}>
               <Link href={item.link}>
                 {i == 0 ? (
                   <GiLargeDress />

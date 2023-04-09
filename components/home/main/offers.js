@@ -24,9 +24,9 @@ export default function Offers() {
         modules={[Pagination, Navigation]}
         className="offers_swiper"
       >
-        {offersArray.map((offer) => (
-          <SwiperSlide>
-            <Link href="">
+        {offersArray.map((offer, index) => (
+          <SwiperSlide key={index}>
+            <Link href="/">
               <img src={offer.image} alt={offer.price} />
             </Link>
             <span>{offer.price}</span>

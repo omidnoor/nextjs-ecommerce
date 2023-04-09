@@ -68,13 +68,12 @@ export default function User() {
             <Swiper
               effect={"cards"}
               grabCursor={true}
-              modules={[EffectCards, Navigation]}
-              Navigation={true}
+              modules={[EffectCards]}
               className="userMenu__swiper"
               style={{ maxWidth: "180px", height: "240px", marginTop: "1rem" }}
             >
-              {userSwiperArray.map((item) => (
-                <SwiperSlide>
+              {userSwiperArray.map((item, index) => (
+                <SwiperSlide key={index}>
                   <Link href={item.link}>
                     <img src={item.image} alt="swiper images" />
                   </Link>
@@ -84,6 +83,11 @@ export default function User() {
           </>
         </div>
       </div>
+      <img
+        src="../../../images/userheader.jpg"
+        alt="user section header image"
+        className={styles.user__footer}
+      />
     </div>
   );
 }

@@ -26,7 +26,7 @@ export default function MainSwiper() {
         className={`${styles.mainSwiper} ${styles.swiper}`}
       >
         {[...Array(10).keys()].map((index) => (
-          <SwiperSlide className={styles["swiper-slide"]}>
+          <SwiperSlide key={index} className={styles["swiper-slide"]}>
             <img
               src={`/images/swiper/${index + 1}.jpg`}
               alt={`swiper image ${index + 1}`}

@@ -33,9 +33,11 @@ export default function Copyright({ country }) {
       <section>&copy;2023 SHOPPAY ALL RIGHT RESERVED.</section>
       <section>
         <ul>
-          {data.map((link) => (
-            <li key={link.name}>
-              <Link href={link.link}>{link.name}</Link>
+          {data.map((link, index) => (
+            <li key={index}>
+              <Link key={link.name} href={link.link}>
+                {link.name}
+              </Link>
             </li>
           ))}
 
