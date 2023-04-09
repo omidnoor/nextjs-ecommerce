@@ -13,7 +13,6 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
 
 .container {
   max-width: 1600px;
-  width: 100%;
   margin: 0 auto;
   min-height: 100vh;
   padding: 1rem;
@@ -99,7 +98,8 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
 }
 
 .mainSwiper,
-.offers_swiper {
+.offers_swiper,
+.flash__swiper {
   .swiper {
     // border-radius: 10px;
     box-shadow: $shadow-1 !important;

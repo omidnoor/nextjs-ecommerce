@@ -1,0 +1,49 @@
+.flash {
+  margin: 1rem 0;
+  background-color: #fff;
+
+  &__header {
+    margin-bottom: 1rem;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    font-weight: 900;
+    font-size: 25px;
+    text-transform: uppercase;
+    background-color: $yellow-color;
+
+    &_right {
+      display: flex;
+      align-items: center;
+      flex: 1 0 auto;
+      gap: 10px;
+
+      svg {
+        transform: scale(1.5);
+        margin-top: -20px;
+      }
+    }
+  }
+  &__card {
+    position: relative;
+    &__discount {
+      background-color: $yellow-color;
+      z-index: 20;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        transform: scale(1.5);
+      }
+    }
+  }
+}
