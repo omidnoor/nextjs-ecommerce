@@ -191,9 +191,22 @@
     gap: 1rem;
     width: 100%;
 
+    a {
+      &:first-of-type {
+        @media (max-width: 670px) {
+          flex: 0 1 25%;
+        }
+      }
+    }
+
     .logo {
       width: 170px;
       margin-top: 10px;
+
+      @media (max-width: 670px) {
+        // transform: scale(0.7);
+        margin-right: 0;
+      }
     }
     .search {
       display: flex;
