@@ -98,8 +98,7 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
 }
 
 .mainSwiper,
-.offers_swiper,
-.flash__swiper {
+.offers_swiper {
   .swiper {
     // border-radius: 10px;
     box-shadow: $shadow-1 !important;
@@ -204,5 +203,16 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
   a {
     height: 100% !important;
     object-fit: cover !important;
+  }
+}
+
+.flash__swiper {
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 160px;
+
+    @media (min-width: 1200px) {
+      display: grid;
+    }
   }
 }

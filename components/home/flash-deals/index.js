@@ -15,25 +15,56 @@ export default function FlashDeals() {
   return (
     <div className={styles.flash}>
       <div className={styles.flash__header}>
-        <div className={styles.flash__header_right}>
+        <div className={styles.flash__header_left}>
           <h1>Flash Sale</h1>
           <MdFlashOn />
         </div>
         <Countdown />
       </div>
       <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
+        slidesPerView={1}
+        spaceBetween={16}
         navigation={true}
         modules={[Navigation]}
+        breakpoints={{
+          400: {
+            slidesPerView: 1,
+            spaceBetween: 16,
+          },
+          450: {
+            slidesPerView: 2,
+            spaceBetween: 16,
+          },
+          600: {
+            slidesPerView: 3,
+            spaceBetween: 16,
+          },
+          700: {
+            slidesPerView: 3,
+            spaceBetween: 16,
+          },
+          900: {
+            slidesPerView: 4,
+            spaceBetween: 16,
+          },
+          1200: {
+            slidesPerView: 5,
+            spaceBetween: 16,
+          },
+          1500: {
+            slidesPerView: 6,
+            spaceBetween: 16,
+          },
+        }}
         className="flash__swiper"
       >
-        .{styles.flash__card}
-        {flashDealsArray.map((item, index) => (
-          <SwiperSlide key={index}>
-            <FlashCard product={item} />
-          </SwiperSlide>
-        ))}
+        <div className={styles.flash__list}>
+          {flashDealsArray.map((item, index) => (
+            <SwiperSlide key={index}>
+              <FlashCard product={item} />
+            </SwiperSlide>
+          ))}
+        </div>
       </Swiper>
     </div>
   );
