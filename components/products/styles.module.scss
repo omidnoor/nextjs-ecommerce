@@ -1,0 +1,22 @@
+.products {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product {
+  position: relative;
+  width: 290px;
+  height: 500px;
+}
+
+.swiper {
+  position: relative;
+  cursor: pointer;
+  background-color: #fff;
+  img {
+    height: 390px;
+    display: block;
+    object-fit: cover;
+  }
+}

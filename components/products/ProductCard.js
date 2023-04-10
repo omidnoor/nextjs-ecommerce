@@ -1,6 +1,9 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import styles from "./styles.module.scss";
 import Product from "@/models/product";
+
+import styles from "./styles.module.scss";
+import ProductSwiper from "./ProductSwiper";
 
 export default function ProductCard({ product }) {
   const [active, setActive] = useState(0);
@@ -22,6 +25,16 @@ export default function ProductCard({ product }) {
     );
   }, [active]);
 
-  console.log(images, prices, productStyles);
-  return <div className={styles.card}>ProductCard</div>;
+  //   console.log(images, prices, productStyles);
+  return (
+    <div className={styles.product}>
+      <div className={styles.product__container}>
+        <Link href={`/product/${product.slug}?styles=${active}`}>
+          <div>
+            <ProductSwiper images={images} />
+          </div>
+        </Link>
+      </div>
+    </div>
+  );
 }
