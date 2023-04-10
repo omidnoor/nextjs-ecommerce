@@ -9,6 +9,7 @@ import styles from "@/styles/Home.module.scss";
 import Main from "@/components/home/main";
 import FlashDeals from "@/components/home/flash-deals";
 import Category from "@/components/home/category";
+import Products from "@/components/products";
 
 export default function Home({ country, products }) {
   const { data: session } = useSession();
@@ -21,6 +22,7 @@ export default function Home({ country, products }) {
           <Main />
           <FlashDeals />
           <Category />
+          <Products products={products} />
         </div>
       </div>
       <Footer country={country} />
@@ -29,22 +31,29 @@ export default function Home({ country, products }) {
 }
 
 export async function getServerSideProps(context) {
-  db.connectDb();
+  try {
+    db.connectDb();
 
-  let products = await Product.find().sort({ createAt: -1 }).lean();
+    let products = await Product.find().sort({ createAt: -1 }).lean();
 
-  const data = await axios
-    .get("https://api.ipregistry.co/?key=m49ix9thr1k7pcns")
-    .then((res) => {
-      return res.data.location.country;
-    })
-    .catch((err) => console.log(err));
+    const data = await axios
+      .get("https://api.ipregistry.co/?key=m49ix9thr1k7pcns")
+      .then((res) => {
+        return res.data.location.country;
+      })
+      .catch((err) => console.log(err));
 
-  return {
-    props: {
-      products: JSON.parse(JSON.stringify(products)),
-      // country: { name: data.name, flag: data.flag.emojitwo },
-      country: { name: "Canada", flag: "/images/canada-flag.png" },
-    },
-  };
+    return {
+      props: {
+        products: JSON.parse(JSON.stringify(products)),
+        // country: { name: data.name, flag: data.flag.emojitwo },
+        country: { name: "Canada", flag: "/images/canada-flag.png" },
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return { props: { products: [], country: { name: "Unknown", flag: "" } } };
+  } finally {
+    db.disconnectDb();
+  }
 }

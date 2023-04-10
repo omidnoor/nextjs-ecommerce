@@ -56,8 +56,8 @@ export default function Category() {
             modules={[Pagination, Navigation]}
             className={`${styles.categorySwiper}`}
           >
-            {productsArray.map(({ header, products, background }) => (
-              <SwiperSlide>
+            {productsArray.map(({ header, products, background }, index) => (
+              <SwiperSlide key={index}>
                 <CategoryCard
                   header={header}
                   products={{ products }}
