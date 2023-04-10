@@ -6,6 +6,8 @@ import Header from "@/components/header";
 import styles from "@/styles/Home.module.scss";
 import Main from "@/components/home/main";
 import FlashDeals from "@/components/home/flash-deals";
+import Category from "@/components/home/category";
+import { women_dresses } from "@/data/home";
 
 export default function Home({ country }) {
   const { data: session } = useSession();
@@ -17,6 +19,7 @@ export default function Home({ country }) {
         <div className={styles.container}>
           <Main />
           <FlashDeals />
+          <Category />
         </div>
       </div>
       <Footer country={country} />
