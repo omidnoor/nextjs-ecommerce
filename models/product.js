@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-import { ObjectId } from "mongodb";
 
-const { objectId } = mongoose.Schema;
+const { ObjectId } = mongoose.Schema.Types;
 
 const reviewSchema = new mongoose.Schema({
   reviewNy: {
@@ -52,13 +51,13 @@ const productSchema = new mongoose.Schema(
       lowercase: true,
     },
     category: {
-      type: objectId,
+      type: ObjectId,
       required: true,
       ref: "Category",
     },
     subCategories: [
       {
-        type: objectId,
+        type: ObjectId,
         ref: "SubCategory",
       },
     ],

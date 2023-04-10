@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { ObjectId } from "mongodb";
+
+const { ObjectId } = mongoose.Schema.Types;
 
 const subCategory = new mongoose.Schema(
   {
