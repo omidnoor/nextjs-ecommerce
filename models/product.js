@@ -1,5 +1,5 @@
-import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
+import { ObjectId } from "mongodb";
 
 const { objectId } = mongoose.Schema;
 
@@ -48,6 +48,8 @@ const productSchema = new mongoose.Schema(
     slug: {
       type: String,
       required: true,
+      unique: true,
+      lowercase: true,
     },
     category: {
       type: objectId,
@@ -128,6 +130,6 @@ const productSchema = new mongoose.Schema(
 );
 
 const Product =
-  mongoose.model.Product || mongoose.model("Product", productSchema);
+  mongoose.models.Product || mongoose.model("Product", productSchema);
 
 export default Product;
