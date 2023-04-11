@@ -31,8 +31,8 @@ export default function ProductSwiper({ images }) {
         modules={[Autoplay]}
       >
         {images.map((image, index) => (
-          <SwiperSlide>
-            <img src={image?.url} alt={`${image} ${index}`} />
+          <SwiperSlide key={index}>
+            <img src={image?.url} alt={`image ${index}`} />
           </SwiperSlide>
         ))}
       </Swiper>
