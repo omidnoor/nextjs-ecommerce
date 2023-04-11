@@ -1,12 +1,18 @@
 import db from "@/utils/db";
 
+import Category from "@/models/category";
+import SubCategory from "@/models/subCategory";
 import Product from "@/models/product";
+import ProductSingle from "@/components/product";
 
 import styles from "@/styles/product.module.scss";
 
-export default function ProductPage({ product }) {
-  console.log(product);
-  return <div>something</div>;
+export default function ProductPage({ product, country }) {
+  return (
+    <>
+      <ProductSingle product={product} country={country} />
+    </>
+  );
 }
 
 export async function getServerSideProps(context) {
@@ -17,7 +23,10 @@ export async function getServerSideProps(context) {
   const style = query.style ?? null;
   const size = query.size || 0;
 
-  const product = await Product.findOne({ slug }).lean();
+  const product = await Product.findOne({ slug })
+    .populate({ path: "category", model: Category })
+    .populate({ path: "subCategories._id", model: SubCategory })
+    .lean();
 
   if (!product) {
     await db.disconnectDb();
@@ -27,9 +36,11 @@ export async function getServerSideProps(context) {
   }
 
   const subProduct = product?.subProducts[style];
+
   const prices = subProduct?.sizes
     .map((size) => size.price)
     .sort((a, b) => a - b);
+
   const newProduct = {
     ...product,
     images: subProduct.images,
@@ -51,13 +62,14 @@ export async function getServerSideProps(context) {
     priceBefore: subProduct.sizes[size].price,
     quantity: subProduct.sizes[size].qty,
   };
-  console.log(newProduct);
-  //   console.log(prices);
+
   await db.disconnectDb();
 
   return {
     props: {
       product: JSON.parse(JSON.stringify(newProduct)),
+      // country: { name: data.name, flag: data.flag.emojitwo },
+      country: { name: "Canada", flag: "/images/canada-flag.png" },
     },
   };
 }
