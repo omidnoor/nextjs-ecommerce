@@ -25,7 +25,7 @@ export default function ProductSwiper({ images }) {
     >
       <Swiper
         ref={swiperRef}
-        centerdSlides={true}
+        centeredSlides={true}
         autoplay={{ delay: 500, stopOnLastSlide: false }}
         speed={1500}
         modules={[Autoplay]}

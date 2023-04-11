@@ -24,11 +24,10 @@ export default function ProductCard({ product }) {
     );
   }, [active]);
 
-  console.log(productStyles);
   return (
     <div className={styles.product}>
       <div className={styles.product__container}>
-        <Link href={`/product/${product?.slug}?styles=${active}`}>
+        <Link href={`/product/${product?.slug}?style=${active}`}>
           <ProductSwiper images={images} />
         </Link>
         {product?.subProducts[active]?.discount ? (
@@ -53,6 +52,7 @@ export default function ProductCard({ product }) {
               productStyles.map((productStyle, index) =>
                 productStyle?.image ? (
                   <img
+                    key={index}
                     src={productStyle.image}
                     className={index === active ? styles.active : ""}
                     onMouseEnter={() => {
@@ -63,6 +63,7 @@ export default function ProductCard({ product }) {
                   />
                 ) : (
                   <span
+                    key={index}
                     style={{ backgroundColor: `${productStyle.color}` }}
                     onMouseEnter={() => {
                       setImages(product.subProducts[index]?.images);

@@ -48,7 +48,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      lowercase: true,
+      // lowercase: true,
     },
     category: {
       type: ObjectId,
@@ -116,6 +116,7 @@ const productSchema = new mongoose.Schema(
           type: Number,
           default: 0,
         },
+        sku: String,
         sold: {
           type: Number,
           default: 0,
