@@ -10,13 +10,15 @@ import styles from "./styles.module.scss";
 
 export default function ProductSingle({ product, country }) {
   const [activeImg, setActiveImg] = useState("");
-  console.log(product);
+
   return (
     <>
       <Head>
         <title>{product.name}</title>
       </Head>
+
       <Header country={country} />
+
       <div className={styles.product}>
         <div className={styles.container}>
           <div className={styles.product__path}>
@@ -25,12 +27,14 @@ export default function ProductSingle({ product, country }) {
               <span> / {sub.name}</span>
             ))}
           </div>
-          <div className={styles.product__main}>
-            <MainSwiper images={product.images} activeImg={activeImg} />
-          </div>
+          <div className={styles.container__inner}>
+            <div className={styles.product__main}>
+              <MainSwiper images={product.images} activeImg={activeImg} />
+            </div>
 
-          <div>
-            <ProductInfo product={product} setActiveImg={setActiveImg} />
+            <div className={styles.info}>
+              <ProductInfo product={product} setActiveImg={setActiveImg} />
+            </div>
           </div>
         </div>
       </div>

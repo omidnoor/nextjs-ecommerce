@@ -1,114 +1,37 @@
 [
   {
     "_id": {
-      "$oid": "62c4711c062128444ad591a1"
+      "$oid": "6214d1234aa4d14421ad0e14"
     },
-    "name": "Allover Plants Print Square Neck Knot Front Dress",
-    "description": "Allover Plants Print Square Neck Knot Front Dress",
-    "brand": "Boho",
-    "slug": "Allover-Plants-Print-Square-Neck-Knot-Front-Dress",
+    "name": "Sweatshirt With Patch Detail",
+    "description": "Sweatshirt With Patch Detail",
+    "brand": "Zara",
+    "slug": "Sweatshirt-With-Patch-Detail",
     "category": {
-      "$oid": "62c46ff0062128444ad59193"
+      "$oid": "62cfeb1e119f0cd432b478d6"
     },
-    "subCategories": [
-      {
-        "$oid": "62c46ffd062128444ad59199"
-      }
-    ],
+    "subCategories": [],
     "details": [
       {
+        "name": "Color",
+        "value": "Black",
+        "_id": {
+          "$oid": "6214d1234aa4d14421ad0e15"
+        }
+      },
+      {
         "name": "Style",
-        "value": "Boho",
+        "value": "Casual",
         "_id": {
-          "$oid": "62c4711c062128444ad591a2"
-        }
-      },
-      {
-        "name": "Pattern Type",
-        "value": "Plants, All Over Print",
-        "_id": {
-          "$oid": "62c4711c062128444ad591a3"
-        }
-      },
-      {
-        "name": "Details",
-        "value": "Knot",
-        "_id": {
-          "$oid": "62c4711c062128444ad591a4"
-        }
-      },
-      {
-        "name": "Type",
-        "value": "A Line",
-        "_id": {
-          "$oid": "62c4711c062128444ad591a5"
-        }
-      },
-      {
-        "name": "Neckline",
-        "value": "Square Neck",
-        "_id": {
-          "$oid": "62c4711c062128444ad591a6"
-        }
-      },
-      {
-        "name": "Sleeve Length",
-        "value": "Short Sleeve",
-        "_id": {
-          "$oid": "62c4711c062128444ad591a7"
-        }
-      },
-      {
-        "name": "Sleeve Type",
-        "value": "Puff Sleeve",
-        "_id": {
-          "$oid": "62c4711c062128444ad591a8"
-        }
-      },
-      {
-        "name": "Waist Line",
-        "value": "High Waist",
-        "_id": {
-          "$oid": "62c4711c062128444ad591a9"
-        }
-      },
-      {
-        "name": "Hem Shaped",
-        "value": "Flared",
-        "_id": {
-          "$oid": "62c4711c062128444ad591aa"
-        }
-      },
-      {
-        "name": "Length",
-        "value": "Long",
-        "_id": {
-          "$oid": "62c4711c062128444ad591ab"
-        }
-      },
-      {
-        "name": "Fit Type",
-        "value": "Regular Fit",
-        "_id": {
-          "$oid": "62c4711c062128444ad591ac"
-        }
-      },
-      {
-        "name": "Fabric",
-        "value": "Non-Stretch",
-        "_id": {
-          "$oid": "62c4711c062128444ad591ad"
-        }
-      },
-      {
-        "name": "Material",
-        "value": "Polyester",
-        "_id": {
-          "$oid": "62c4711c062128444ad591ae"
+          "$oid": "6214d1234aa4d14421ad0e16"
         }
       }
     ],
     "questions": [],
+    "refundPolicy": "30 days",
+    "rating": 0,
+    "numReviews": 0,
+    "shipping": 0,
     "subProducts": [
       {
         "sku": "sw2206138988536738",
@@ -223,144 +146,14 @@
         }
       }
     ],
+    "reviews": [],
     "createdAt": {
-      "$date": "2022-07-05T17:13:00.324Z"
+      "$date": "2022-02-12T23:50:59.680Z"
     },
     "updatedAt": {
-      "$date": "2022-07-09T09:44:46.823Z"
+      "$date": "2022-02-12T23:50:59.680Z"
     },
-    "__v": 17,
-    "numReviews": 5,
-    "rating": 3.5,
-    "refundPolicy": "30 days",
-    "reviews": [
-      {
-        "reviewBy": {
-          "$oid": "62b33178fbcc6f0282db0606"
-        },
-        "rating": 1,
-        "review": "aaaaaaaaaaaaaaa",
-        "size": "S",
-        "style": {
-          "color": "#dac4ac",
-          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657045396/products/ouh3i2klgrmwluexm3q9.webp"
-        },
-        "fit": "Small",
-        "images": [
-          {
-            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657145489/reviews/whcchkvkbd4dypptoccx.webp",
-            "public_url": "reviews/whcchkvkbd4dypptoccx"
-          }
-        ],
-        "_id": {
-          "$oid": "62c6089247a21fb57bb8b234"
-        },
-        "createdAt": {
-          "$date": "2022-07-06T22:11:30.149Z"
-        },
-        "updatedAt": {
-          "$date": "2022-07-09T09:44:46.559Z"
-        }
-      },
-      {
-        "reviewBy": {
-          "$oid": "62c69fc002820c409dcce9ea"
-        },
-        "rating": 4,
-        "review": "i like it  a lot but a bit large for me for size L",
-        "size": "L",
-        "style": {
-          "color": "#dac4ac",
-          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657045396/products/ouh3i2klgrmwluexm3q9.webp"
-        },
-        "fit": "Large",
-        "images": [],
-        "_id": {
-          "$oid": "62c6a03702820c409dcce9f2"
-        },
-        "createdAt": {
-          "$date": "2022-07-07T08:58:31.646Z"
-        },
-        "updatedAt": {
-          "$date": "2022-07-07T08:58:31.646Z"
-        }
-      },
-      {
-        "reviewBy": {
-          "$oid": "62a22b5cd0e120974f5c866e"
-        },
-        "rating": 5,
-        "review": "amaaaaaaaaaaaaaaaaaaaaaaazing",
-        "size": "L",
-        "style": {
-          "color": "#dac4ac",
-          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657045396/products/ouh3i2klgrmwluexm3q9.webp"
-        },
-        "fit": "Large",
-        "images": [
-          {
-            "url": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657189685/reviews/i6wmqtwnjcolkguit6qi.webp",
-            "public_url": "reviews/i6wmqtwnjcolkguit6qi"
-          }
-        ],
-        "_id": {
-          "$oid": "62c6b13402820c409dccea08"
-        },
-        "createdAt": {
-          "$date": "2022-07-07T10:11:00.304Z"
-        },
-        "updatedAt": {
-          "$date": "2022-07-07T10:28:07.389Z"
-        }
-      },
-      {
-        "reviewBy": {
-          "$oid": "62a22d98d0e120974f5c8671"
-        },
-        "rating": 2.5,
-        "review": "aaaaaaaa",
-        "size": "S",
-        "style": {
-          "color": "#ecd297",
-          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041179/products/ac3homl0yeimydql5rq4.webp"
-        },
-        "fit": "True to size",
-        "images": [],
-        "_id": {
-          "$oid": "62c6d15802820c409dccea3d"
-        },
-        "createdAt": {
-          "$date": "2022-07-07T12:28:08.226Z"
-        },
-        "updatedAt": {
-          "$date": "2022-07-07T12:30:52.277Z"
-        }
-      },
-      {
-        "reviewBy": {
-          "$oid": "62a2281cd0e120974f5c866c"
-        },
-        "rating": 5,
-        "review": "bbbbbbbbbbbbbb",
-        "size": "S",
-        "style": {
-          "color": "#ecd297",
-          "image": "https://res.cloudinary.com/dmhcnhtng/image/upload/v1657041179/products/ac3homl0yeimydql5rq4.webp"
-        },
-        "fit": "True to size",
-        "images": [],
-        "_id": {
-          "$oid": "62c6d29602820c409dccea5e"
-        },
-        "createdAt": {
-          "$date": "2022-07-07T12:33:26.719Z"
-        },
-        "updatedAt": {
-          "$date": "2022-07-07T12:33:26.719Z"
-        }
-      }
-    ],
-    "shipping": "2"
+    "__v": 0
   },
   {
     "_id": {
