@@ -1,10 +1,12 @@
 import { useState } from "react";
 import Head from "next/head";
+import ProductInfo from "./ProductInfo";
 
-import styles from "./styles.module.scss";
 import Header from "../header";
 import Footer from "../footer";
 import MainSwiper from "./MainSwiper";
+
+import styles from "./styles.module.scss";
 
 export default function ProductSingle({ product, country }) {
   const [activeImg, setActiveImg] = useState("");
@@ -25,6 +27,10 @@ export default function ProductSingle({ product, country }) {
           </div>
           <div className={styles.product__main}>
             <MainSwiper images={product.images} activeImg={activeImg} />
+          </div>
+
+          <div>
+            <ProductInfo product={product} setActiveImg={setActiveImg} />
           </div>
         </div>
       </div>
