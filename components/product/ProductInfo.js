@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Rating from "@mui/material/Rating";
+import { TbMinus, TbPlus } from "react-icons/tb";
 
 import styles from "./styles.module.scss";
 import Link from "next/link";
@@ -8,7 +10,17 @@ import Link from "next/link";
 export default function ProductInfo({ product }) {
   const router = useRouter();
   const [size, setSize] = useState(null);
-  console.log(product.sizes);
+  const [qty, setQty] = useState(1);
+
+  useEffect(() => {
+    setSize(router.query.size);
+    setQty(1);
+  }, [router.query.size]);
+
+  useEffect(() => {
+    qty > product.quantity && setQty(product.quantity);
+  }, [router.query.size]);
+  console.log(size);
   return (
     <div className={styles.info__container}>
       <h1 className={styles.info__name}>{product.name}</h1>
@@ -22,7 +34,7 @@ export default function ProductInfo({ product }) {
           style={{ color: "#facf19" }}
         />
         {product.numReviews}
-        {product.numReviews === 1 ? "review" : "reviews"}
+        {product.numReviews === 1 ? " review" : " reviews"}
       </div>
       <div className={styles.info__price}>
         {!size ? <h2>{product.priceRange}</h2> : <h2>{product.price}</h2>}
@@ -43,7 +55,7 @@ export default function ProductInfo({ product }) {
       </div>
 
       <div className={styles.info__qty}>
-        {!size
+        {size
           ? `${product.quantity} pieces available`
           : `${product.sizes.reduce(
               (start, next) => start + next.qty,
@@ -72,6 +84,40 @@ export default function ProductInfo({ product }) {
             </Link>
           ))}
         </div>
+      </div>
+
+      <div className={styles.info__colors}>
+        {product.color && `Select a color :`}
+        {product.color &&
+          product.color.map((color, index) => (
+            <div
+              key={index}
+              className={`${styles.info__color} ${
+                index.toString() === router.query.style
+                  ? styles.active_color
+                  : ""
+              }`}
+            >
+              <Link href={`/product/${product.slug}?style=${index}`}>
+                <img src={color.image} alt={`color ${index}`} />
+              </Link>
+            </div>
+          ))}
+      </div>
+
+      <div className={styles.info__qty_order}>
+        <span>Select quantity :</span>
+        <button onClick={() => qty > 1 && setQty((prevQty) => prevQty - 1)}>
+          <TbMinus />
+        </button>
+        <span>{qty}</span>
+        <button
+          onClick={() =>
+            qty < product.quantity && setQty((prevQty) => prevQty + 1)
+          }
+        >
+          <TbPlus />
+        </button>
       </div>
     </div>
   );

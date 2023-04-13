@@ -130,7 +130,7 @@
   &__rating {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 10px;
     font-size: 14px;
     margin-top: 10px;
   }
@@ -163,7 +163,7 @@
   &__sizes {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 1.5rem;
     gap: 5px;
 
     &_active {
@@ -178,9 +178,10 @@
     &_size {
       border: 1px solid #e6e6e6;
       border-radius: 50%;
-      width: 45px;
-      height: 45px;
+      width: 30px;
+      height: 30px;
       padding: 2px;
+      font-size: 12px;
       display: grid;
       place-items: center;
       cursor: pointer;
@@ -193,6 +194,26 @@
     }
   }
 
+  &__colors {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+
+  &__color {
+    width: 30px;
+    height: 30px;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+  .active_color {
+    outline: 2px solid #ccc;
+    outline-offset: 1px;
+    border-radius: 50%;
+  }
+
   &__shipping {
     color: $blue-color;
     margin-top: 10px;
@@ -201,5 +222,28 @@
   &__qty {
     font-size: 14px;
     margin-top: 10px;
+  }
+
+  &__qty_order {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    span {
+      // width: 20px;
+      text-align: center;
+    }
+    button {
+      display: flex;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+
+      svg {
+        transform: scale(0.9);
+      }
+    }
   }
 }
