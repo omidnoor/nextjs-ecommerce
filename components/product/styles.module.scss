@@ -132,12 +132,14 @@
     align-items: center;
     gap: 2px;
     font-size: 14px;
+    margin-top: 10px;
   }
 
   &__price {
     color: #fa6338;
     display: flex;
     align-items: center;
+    margin-top: 10px;
 
     h3 {
       font-weight: normal;
@@ -157,5 +159,47 @@
         }
       }
     }
+  }
+  &__sizes {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 5px;
+
+    &_active {
+      background-color: #e6e6e6;
+    }
+
+    &_wrap {
+      display: flex;
+      gap: 10px;
+    }
+
+    &_size {
+      border: 1px solid #e6e6e6;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      padding: 2px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.1s ease-in-out;
+
+      &:hover {
+        background-color: #666;
+        color: #e6e6e6;
+      }
+    }
+  }
+
+  &__shipping {
+    color: $blue-color;
+    margin-top: 10px;
+  }
+
+  &__qty {
+    font-size: 14px;
+    margin-top: 10px;
   }
 }

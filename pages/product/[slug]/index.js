@@ -50,8 +50,13 @@ export async function getServerSideProps(context) {
     color: product.subProducts.map((product) => product.color),
     priceRange:
       prices.length > 1
-        ? `From ${prices[0]}$ to ${prices[prices.length - 1]}$`
-        : "",
+        ? `From ${Math.ceil(
+            prices[0] - (prices[0] * subProduct.discount) / 100,
+          )}$ to ${Math.ceil(
+            prices[prices.length - 1] -
+              (prices[prices.length - 1] * subProduct.discount) / 100,
+          )}$`
+        : Math.ceil(prices[0]),
     price:
       subProduct.discount > 0
         ? (
