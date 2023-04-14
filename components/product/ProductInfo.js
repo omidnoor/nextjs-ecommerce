@@ -1,12 +1,14 @@
+import Link from "next/link";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Rating from "@mui/material/Rating";
 import { TbMinus, TbPlus } from "react-icons/tb";
+import { BsHandbagFill, BsHeart } from "react-icons/bs";
+
+import Share from "./Share";
 
 import styles from "./styles.module.scss";
-import Link from "next/link";
-import { BsHandbagFill, BsHeart } from "react-icons/bs";
 
 export default function ProductInfo({ product }) {
   const router = useRouter();
@@ -133,6 +135,10 @@ export default function ProductInfo({ product }) {
           <BsHeart />
           WISHLIST
         </button>
+      </div>
+
+      <div className={styles.info__shares}>
+        <Share />
       </div>
     </div>
   );

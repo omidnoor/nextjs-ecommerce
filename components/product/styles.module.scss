@@ -297,4 +297,25 @@
       display: flex;
     }
   }
+
+  &__shares {
+    margin-top: 1.5rem;
+  }
+}
+
+.share {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  button {
+    svg {
+      border-radius: 50%;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        filter: brightness(110%);
+      }
+    }
+  }
 }
