@@ -5,15 +5,15 @@ import styles from "./styles.module.scss";
 export default function MainSwiper({ images, activeImg }) {
   const [active, setActive] = useState(0);
   return (
-    <div className={styles.swiper}>
-      <div className={styles.swiper__active}>
+    <div className={styles.swiper_img}>
+      <div className={styles.swiper_img__active}>
         <img src={images[active].url} alt="active product image" />
       </div>
 
-      <div className={styles.swiper__list}>
+      <div className={styles.swiper_img__list}>
         {images.map((image, index) => (
           <div
-            className={`${styles.swiper__list_item} ${
+            className={`${styles.swiper_img__list_item} ${
               index === active && styles.active
             }`}
             key={index}

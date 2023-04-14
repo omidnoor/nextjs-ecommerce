@@ -1,6 +1,6 @@
 import db from "@/utils/db";
 
-import Category from "@/models/category";
+import Category from "@/models/Category";
 import SubCategory from "@/models/subCategory";
 import Product from "@/models/product";
 import ProductSingle from "@/components/product";
@@ -56,14 +56,13 @@ export async function getServerSideProps(context) {
             prices[prices.length - 1] -
               (prices[prices.length - 1] * subProduct.discount) / 100,
           )}$`
-        : Math.ceil(prices[0]),
+        : `${Math.ceil(prices[0])}$`,
     price:
       subProduct.discount > 0
-        ? (
-            subProduct.sizes[size].price *
-            (1 - subProduct.discount / 100)
-          ).toFixed(2)
-        : subProduct.sizes[size].price,
+        ? (subProduct.sizes[size].price * (1 - subProduct.discount / 100))
+            .toFixed(2)
+            .concat("$")
+        : subProduct.sizes[size].price.toFixed(2).concat("$"),
     priceBefore: `${subProduct.sizes[size].price}$`,
     quantity: subProduct.sizes[size].qty,
   };

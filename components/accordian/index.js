@@ -67,8 +67,8 @@ export default function Accordian({ details }) {
           <p>{details[0]}</p>
         </AccordionDetails>
         <AccordionDetails className="scrollbar">
-          {details.slice(1, details.length - 1).map((info) => (
-            <div className={styles.accordian_grid}>
+          {details.slice(1, details.length - 1).map((info, index) => (
+            <div key={index} className={styles.accordian_grid}>
               <span>{info.name}:</span>
               <span>{info.value}</span>
             </div>

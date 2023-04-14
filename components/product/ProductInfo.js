@@ -10,6 +10,7 @@ import Accordian from "../accordian";
 import Share from "./Share";
 
 import styles from "./styles.module.scss";
+import Similar from "./similar";
 
 export default function ProductInfo({ product }) {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function ProductInfo({ product }) {
   useEffect(() => {
     qty > product.quantity && setQty(product.quantity);
   }, [router.query.size]);
-  console.log(size);
+
   return (
     <div className={styles.info__container}>
       <h1 className={styles.info__name}>{product.name}</h1>
@@ -145,6 +146,10 @@ export default function ProductInfo({ product }) {
       <div className={styles.info__accordians}>
         <Accordian details={[product.description, ...product.details]} />
       </div>
+      <Similar />
+      {/* <div className={styles.similar}>
+        <Similar />
+      </div> */}
     </div>
   );
 }
