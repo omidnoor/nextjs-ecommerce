@@ -82,6 +82,13 @@ export async function getServerSideProps(context) {
         percentage: 0,
       },
     ],
+    allSizes: product.subProducts
+      .map((product) => product.sizes)
+      .flat()
+      .sort((a, b) => a.size - b.size)
+      .filter(
+        (el, i, arr) => arr.findIndex((el2) => el2.size === el.size) === i,
+      ),
   };
 
   await db.disconnectDb();
