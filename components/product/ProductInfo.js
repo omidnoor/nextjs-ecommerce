@@ -6,6 +6,7 @@ import Rating from "@mui/material/Rating";
 import { TbMinus, TbPlus } from "react-icons/tb";
 import { BsHandbagFill, BsHeart } from "react-icons/bs";
 
+import Accordian from "../accordian";
 import Share from "./Share";
 
 import styles from "./styles.module.scss";
@@ -139,6 +140,10 @@ export default function ProductInfo({ product }) {
 
       <div className={styles.info__shares}>
         <Share />
+      </div>
+
+      <div className={styles.info__accordians}>
+        <Accordian details={[product.description, ...product.details]} />
       </div>
     </div>
   );
