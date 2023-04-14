@@ -5,6 +5,7 @@ import ProductInfo from "./ProductInfo";
 import Header from "../header";
 import Footer from "../footer";
 import MainSwiper from "./MainSwiper";
+import Reviews from "./reviews";
 
 import styles from "./styles.module.scss";
 
@@ -28,14 +29,13 @@ export default function ProductSingle({ product, country }) {
             ))}
           </div>
           <div className={styles.container__inner}>
-            <div className={styles.product__main}>
-              <MainSwiper images={product.images} activeImg={activeImg} />
-            </div>
+            <MainSwiper images={product.images} activeImg={activeImg} />
 
             <div className={styles.info}>
               <ProductInfo product={product} setActiveImg={setActiveImg} />
             </div>
           </div>
+          <Reviews product={product} />
         </div>
       </div>
 

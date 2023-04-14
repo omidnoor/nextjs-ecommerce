@@ -13,9 +13,7 @@ export default function MainSwiper({ images, activeImg }) {
       <div className={styles.swiper_img__list}>
         {images.map((image, index) => (
           <div
-            className={`${styles.swiper_img__list_item} ${
-              index === active && styles.active
-            }`}
+            className={`${index === active && styles.active}`}
             key={index}
             onMouseOver={() => setActive(index)}
           >
