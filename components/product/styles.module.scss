@@ -208,6 +208,7 @@
       border-radius: 50%;
     }
   }
+
   .active_color {
     outline: 2px solid #ccc;
     outline-offset: 1px;
@@ -244,6 +245,56 @@
       svg {
         transform: scale(0.9);
       }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    max-width: 500px;
+
+    button {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+      color: #666;
+      background-color: #e6e6e6;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+
+      &:first-of-type {
+        &:hover {
+          color: $blue-color;
+        }
+      }
+
+      &:last-of-type {
+        border: 1px solid #e6e6e6;
+        background-color: #fff;
+        max-width: 170px;
+
+        &:hover {
+          background-color: #e6e6e6;
+          color: #666;
+        }
+      }
+
+      svg {
+        width: 30px;
+        height: 30px;
+        &:first-of-type {
+          transform: translateY(-3px);
+        }
+      }
+    }
+
+    @media (min-width: 1160px) {
+      display: flex;
     }
   }
 }
