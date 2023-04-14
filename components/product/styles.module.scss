@@ -108,7 +108,7 @@
 .info {
   color: #666;
   background-color: #fff;
-  max-width: 340px;
+  max-width: 500px;
 
   @media (max-width: 840px) {
     padding-top: 1rem;
@@ -255,6 +255,7 @@
 
   &__actions {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
     margin-top: 2.5rem;
     max-width: 500px;
@@ -281,7 +282,7 @@
       &:last-of-type {
         border: 1px solid #e6e6e6;
         background-color: #fff;
-        max-width: 170px;
+        // max-width: 170px;
 
         &:hover {
           background-color: #e6e6e6;
@@ -292,6 +293,7 @@
       svg {
         width: 30px;
         height: 30px;
+
         &:first-of-type {
           transform: translateY(-3px);
         }
@@ -300,6 +302,13 @@
 
     @media (min-width: 1160px) {
       display: flex;
+      flex-direction: row;
+
+      button {
+        &:last-of-type {
+          max-width: 170px;
+        }
+      }
     }
   }
 
@@ -309,6 +318,10 @@
 
   &__accordians {
     margin-top: 1.5rem;
+  }
+
+  &__similar {
+    margin-top: 2.5rem;
   }
 }
 

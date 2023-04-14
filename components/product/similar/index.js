@@ -5,19 +5,18 @@ import { Navigation } from "swiper";
 import { simillar_products } from "@/data/products";
 
 import styles from "./styles.module.scss";
-import "swiper/css";
-import "swiper/css/navigation";
-
+import "swiper/scss";
+import "swiper/scss/navigation";
 export default function Similar() {
   return (
     <>
       <Swiper
-        slidesPerView={1}
+        slidesPerView={2}
         spaceBetween={30}
         slidesPerGroup={3}
         navigation={true}
         modules={[Navigation]}
-        className=" similar_swiper"
+        className={styles.similar_swiper}
       >
         {simillar_products.map((product, index) => (
           <SwiperSlide key={index}>

@@ -146,10 +146,10 @@ export default function ProductInfo({ product }) {
       <div className={styles.info__accordians}>
         <Accordian details={[product.description, ...product.details]} />
       </div>
-      <Similar />
-      {/* <div className={styles.similar}>
+
+      <div className={styles.info__similar}>
         <Similar />
-      </div> */}
+      </div>
     </div>
   );
 }

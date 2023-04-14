@@ -89,6 +89,18 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
   margin-right: auto;
   cursor: pointer;
 
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #ffffff !important;
+    transform: scale(0.5) !important;
+    width: 50px !important;
+    height: 60px !important;
+    transition: all 0.2s ease-in-out !important;
+    background-color: #66666691;
+    padding: 10px !important;
+    display: none;
+  }
+
   &:hover {
     .swiper-button-prev,
     .swiper-button-next {
@@ -115,17 +127,6 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
   background-color: #fff !important;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
-  color: #ffffff !important;
-  transform: scale(0.5) !important;
-  width: 50px !important;
-  height: 60px !important;
-  transition: all 0.2s ease-in-out !important;
-  background-color: #66666691;
-  padding: 10px !important;
-  display: none;
-}
 .swiper-button-prev {
   left: -5px !important;
 }
@@ -215,4 +216,7 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
       display: grid;
     }
   }
+}
+
+.similar_swiper {
 }
