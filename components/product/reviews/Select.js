@@ -9,6 +9,7 @@ export default function Select({
   data,
   onSizeChange,
   onStyleChange,
+  onFitChange,
 }) {
   //   console.log(data);
   const [visible, setVisible] = useState(false);
@@ -27,13 +28,14 @@ export default function Select({
         }}
       >
         <span className={`${styles.flex} ${styles.select__header_wrap}`}>
-          {text === "Size" ? (
-            props || `Select ${text}`
-          ) : text === "Style" && props.image ? (
+          {text === "Size" ? props || `Select ${text}` : ""}
+          {text === "Style" && props.image ? (
             <img src={props.image} alt="styles" />
           ) : (
             ""
           )}
+          {text === "Style" && !props.image ? `Select ${text}` : ""}
+          {text === "How does it fit" ? props || text : ""}
           <IoArrowDown />
         </span>
 
@@ -63,6 +65,22 @@ export default function Select({
                       <span>
                         <img src={item.image} alt="styles" />
                       </span>
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+
+            <ul className={styles.select__header_menu}>
+              {data?.map((item, index) => {
+                if (text === "How does it fit") {
+                  return (
+                    <li
+                      key={index}
+                      onClick={() => onFitChange(item)}
+                      style={{ background: `${item.fit}` }}
+                    >
+                      <span>{item}</span>
                     </li>
                   );
                 }

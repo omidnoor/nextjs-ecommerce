@@ -115,7 +115,7 @@
 
       &__header {
         position: relative;
-        width: 140px;
+        width: 130px;
         // max-width: 170px;
         min-height: 40px;
         border: 1px solid #ccc;
@@ -125,6 +125,7 @@
         gap: 5px;
         padding: 0 10px;
         font-weight: 700;
+        font-size: 14px;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
 
@@ -163,6 +164,58 @@
           height: 30px;
           border-radius: 50%;
           object-fit: cover;
+        }
+      }
+    }
+
+    textarea {
+      margin-top: 1rem;
+      border: none;
+      outline: none;
+      resize: none;
+      min-height: 150px;
+      padding: 1rem;
+      width: 100%;
+    }
+
+    .add_img {
+      //   height: 40px;
+      //   button {
+      //     height: 100%;
+      //     margin-top: 0;
+      //   }
+
+      .imgs_wrap {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        span {
+          position: relative;
+          img {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+          }
+
+          svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 30px;
+            width: 30px;
+            fill: #222;
+            cursor: pointer;
+            box-shadow: $shadow-2;
+            display: none;
+          }
+
+          &:hover {
+            svg {
+              display: block;
+            }
+          }
         }
       }
     }
