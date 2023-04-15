@@ -33,7 +33,7 @@ export default function Reviews({ product }) {
 
           <div className={styles.reviews__stats_reviews}>
             {product.ratings.map((rating, index) => (
-              <div className={styles.reviews__stats_reviews_review}>
+              <div key={index} className={styles.reviews__stats_reviews_review}>
                 <Rating
                   name="half-rating-read"
                   defaultValue={5 - index}
