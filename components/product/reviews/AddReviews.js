@@ -6,7 +6,7 @@ import Images from "./Images";
 
 import styles from "./styles.module.scss";
 
-const fits = ["Too Small", "Fit", "Too Large"];
+const fits = ["Too Small", "Perfect", "Too Large"];
 
 export default function AddReviews({ product }) {
   const [size, setSize] = useState("");
@@ -48,7 +48,7 @@ export default function AddReviews({ product }) {
 
           <Select
             props={fit}
-            text="How does it fit"
+            text="Fit"
             data={fits.filter((s) => s !== fit)}
             onFitChange={fitHandler}
           />

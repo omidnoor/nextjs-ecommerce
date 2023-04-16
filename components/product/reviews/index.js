@@ -10,7 +10,7 @@ import styles from "./styles.module.scss";
 export default function Reviews({ product }) {
   const { data: session } = useSession();
   const router = useRouter();
-
+  console.log(product);
   function signInHandler() {
     signIn({ callbackUrl: router.asPath });
   }
@@ -63,7 +63,11 @@ export default function Reviews({ product }) {
           </button>
         )}
 
-        <Table reviews={product.reviews} />
+        <Table
+          reviews={product.reviews}
+          allSizes={product.allSizes}
+          colors={product.color}
+        />
       </div>
     </div>
   );

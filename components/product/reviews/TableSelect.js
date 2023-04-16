@@ -3,18 +3,21 @@ import { useState } from "react";
 
 import styles from "./styles.module.scss";
 
-export default function Select({
+export default function TableSelect({
   props,
   text,
   data,
+  onRatingChange,
   onSizeChange,
   onStyleChange,
-  onFitChange,
+  onOrderChange,
 }) {
   const [visible, setVisible] = useState(false);
+
   return (
     <div className={styles.select}>
-      {text}:
+      <div className={styles.select__title}>{text}:</div>
+
       <div
         className={styles.select__header}
         onMouseOver={() => setVisible(true)}
@@ -22,24 +25,38 @@ export default function Select({
         style={{
           padding: "0 5px",
           backgroundColor: `${
-            text === "Style" && props.color ? `${props.color}` : ""
+            text === "Style" && props?.color ? `${props.color}` : ""
           }`,
         }}
       >
         <span className={`${styles.flex} ${styles.select__header_wrap}`}>
-          {text === "Size" ? props || `Select ${text}` : ""}
+          {text === "Rating" || text === "Size" || text === "Order"
+            ? props || `Select ${text}`
+            : ""}
           {text === "Style" && props.image ? (
             <img src={props.image} alt="styles" />
           ) : (
             ""
           )}
-          {text === "Style" && !props.image ? `Select ${text}` : ""}
-          {text === "Fit" ? props || text : ""}
+          {text === "Style" && !props?.image ? `Select ${text}` : ""}
+
           <IoArrowDown />
         </span>
 
         {visible && (
           <>
+            <ul className={styles.select__header_menu}>
+              {data?.map((item, index) => {
+                if (text === "Rating") {
+                  return (
+                    <li key={index} onClick={() => onRatingChange(item.text)}>
+                      <span>{item.text}</span>
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+
             <ul className={styles.select__header_menu}>
               {data?.map((item, index) => {
                 if (text === "Size") {
@@ -61,8 +78,14 @@ export default function Select({
                       onClick={() => onStyleChange(item)}
                       style={{ background: `${item.color}` }}
                     >
-                      <span>
-                        <img src={item.image} alt="styles" />
+                      <span
+                        style={{ background: `${!item.image ? "#FFF" : ""}` }}
+                      >
+                        {item.image ? (
+                          <img src={item.image} alt="styles" />
+                        ) : (
+                          "All Styles"
+                        )}
                       </span>
                     </li>
                   );
@@ -72,14 +95,10 @@ export default function Select({
 
             <ul className={styles.select__header_menu}>
               {data?.map((item, index) => {
-                if (text === "Fit") {
+                if (text === "Order") {
                   return (
-                    <li
-                      key={index}
-                      onClick={() => onFitChange(item)}
-                      style={{ background: `${item.fit}` }}
-                    >
-                      <span>{item}</span>
+                    <li key={index} onClick={() => onOrderChange(item.text)}>
+                      <span>{item.value}</span>
                     </li>
                   );
                 }
