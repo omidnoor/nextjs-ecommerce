@@ -16,6 +16,9 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
   margin: 0 auto;
   min-height: 100vh;
   padding: 1rem;
+  @media (max-width: 768px) {
+    // max-width: 98%;
+  }
 }
 
 .flex {

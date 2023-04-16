@@ -97,6 +97,12 @@
 
   &__active {
     z-index: 99;
+
+    @media (max-width: 500px) {
+      img {
+        width: 100%;
+      }
+    }
   }
 }
 

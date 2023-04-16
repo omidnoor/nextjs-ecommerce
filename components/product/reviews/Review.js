@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 
 export default function Review({ review }) {
   const { name, image } = review.reviewBy;
-  console.log(review);
+  console.log(review.rating);
 
   return (
     <div className={styles.review}>
@@ -19,7 +19,7 @@ export default function Review({ review }) {
         <div className={styles.review__info}>
           <Rating
             name="half-rating-read"
-            defaultRating={review.rating}
+            defaultValue={review.rating}
             readonly
             style={{ color: "#FACF19" }}
           />

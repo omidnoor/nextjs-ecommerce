@@ -33,6 +33,13 @@
       height: 100%;
     }
 
+    @media (max-width: 500) {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
     &_overview {
       &_rating {
         margin-top: 1rem;
@@ -56,7 +63,7 @@
 
       &_review {
         display: grid;
-        grid-template-columns: 1fr 1fr 40px;
+        grid-template-columns: 1fr 120px 1fr;
         place-items: center;
         gap: 10px;
 
@@ -64,11 +71,16 @@
           width: 30px;
           height: 30px;
           margin-right: 10px;
+          @media (max-width: 500px) {
+            width: 25px;
+            height: 25px;
+            margin-right: 2px;
+          }
         }
 
         .bar {
           position: relative;
-          width: 170px;
+          width: 120px;
           display: grid;
           height: 5px;
           background-color: #ccc;
@@ -79,12 +91,12 @@
             position: absolute;
             left: 0;
             height: 100%;
-            width: 50%;
+            // width: 50%;
             background-color: $blue-color;
           }
 
           @media (max-width: 500) {
-            width: 130px;
+            width: 20px !important;
           }
         }
 
