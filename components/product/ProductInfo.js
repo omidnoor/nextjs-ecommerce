@@ -11,7 +11,7 @@ import { BsHandbagFill, BsHeart } from "react-icons/bs";
 import Accordian from "../accordian";
 import Share from "./Share";
 import Similar from "./similar";
-import { addToCart } from "@/store/cartSlice";
+import { addToCart, updateCart } from "@/store/cartSlice";
 
 import styles from "./styles.module.scss";
 
@@ -48,23 +48,15 @@ export default function ProductInfo({ product }) {
         setError("This product is out of stock");
       } else {
         let _uid = `${data._id}_${product.style}_${router.query.size}`;
-        let exist = cart?.cartItems?.find((p) => p._uid === _uid);
+        let exist = cart.items?.find((p) => p._uid === _uid);
+
         if (exist) {
-          //update
+          dispatch(updateCart({ ...data, qty, size: data.size, _uid }));
         } else {
-          // console.log("addToCart payload:", {
-          //   ...data,
-          //   qty,
-          //   size,
-          //   _uid,
-          // });
           dispatch(addToCart({ ...data, qty, size: data.size, _uid }));
         }
       }
       setError(null);
-      console.log(cart);
-      console.log("Current cartItems state:", cart.cartItems);
-      // console.log(data);
     } catch (error) {
       console.log(error);
     }

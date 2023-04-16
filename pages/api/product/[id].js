@@ -14,7 +14,6 @@ handler.get(async (req, res) => {
     let discount = product.subProducts[style].discount;
     let priceBefore = product.subProducts[style].sizes[size].price;
     let price = discount ? priceBefore * (1 - discount / 100) : priceBefore;
-    db.disconnectDb();
 
     return res.status(200).json({
       _id: product._id,
@@ -35,6 +34,8 @@ handler.get(async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  } finally {
+    db.disconnectDb();
   }
 });
 
