@@ -25,7 +25,7 @@ export default function Main() {
 
         <Link href="/cart" className={styles.cart}>
           <FaOpencart />
-          <span>{cart.items.length}</span>
+          <span>{cart?.cartItems?.length}</span>
         </Link>
       </div>
     </div>

@@ -11,6 +11,14 @@ const reducers = combineReducers({ cart });
 const config = {
   key: "root",
   storage,
+  version: 2,
+  migrate: (state) => {
+    return Promise.resolve(
+      state
+        ? { ...state, _persist: { ...state._persist, version: 1 } }
+        : undefined,
+    );
+  },
 };
 
 const reducer = persistReducer(config, reducers);
@@ -29,4 +37,5 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+// console.log("Store state:", store.getState());
 export default store;

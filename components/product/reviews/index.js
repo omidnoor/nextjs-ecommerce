@@ -10,7 +10,7 @@ import styles from "./styles.module.scss";
 export default function Reviews({ product }) {
   const { data: session } = useSession();
   const router = useRouter();
-  console.log(product);
+  // console.log(product);
   function signInHandler() {
     signIn({ callbackUrl: router.asPath });
   }

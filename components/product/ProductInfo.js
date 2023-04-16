@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -9,15 +10,19 @@ import { BsHandbagFill, BsHeart } from "react-icons/bs";
 
 import Accordian from "../accordian";
 import Share from "./Share";
+import Similar from "./similar";
+import { addToCart } from "@/store/cartSlice";
 
 import styles from "./styles.module.scss";
-import Similar from "./similar";
 
 export default function ProductInfo({ product }) {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [size, setSize] = useState(null);
   const [qty, setQty] = useState(1);
-
+  const [error, setError] = useState(null);
+  const { cart } = useSelector((state) => ({ ...state }));
+  console.log("Current cart state:", cart);
   useEffect(() => {
     setSize(router.query.size);
     setQty(1);
@@ -29,12 +34,37 @@ export default function ProductInfo({ product }) {
 
   const addToCartHandler = async () => {
     try {
+      if (!router.query.size) {
+        setError("Please select a size");
+      }
       const { data } = await axios.get(
         `/api/product/${product._id}?style=${product.style}&size=${
           router.query.size ? router.query.size : ""
         }`,
       );
-      console.log(data);
+      if (qty > data.quantity) {
+        setError("This quantity is more than stock. Try a lower quantity");
+      } else if (data.quantity < 1) {
+        setError("This product is out of stock");
+      } else {
+        let _uid = `${data._id}_${product.style}_${router.query.size}`;
+        let exist = cart?.cartItems?.find((p) => p._uid === _uid);
+        if (exist) {
+          //update
+        } else {
+          // console.log("addToCart payload:", {
+          //   ...data,
+          //   qty,
+          //   size,
+          //   _uid,
+          // });
+          dispatch(addToCart({ ...data, qty, size: data.size, _uid }));
+        }
+      }
+      setError(null);
+      console.log(cart);
+      console.log("Current cartItems state:", cart.cartItems);
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -140,6 +170,7 @@ export default function ProductInfo({ product }) {
       </div>
 
       <div className={styles.info__actions}>
+        {error && <p className={styles.error}>{error}</p>}
         <button
           disabled={product.quantity < 1}
           style={{ cursor: `${product.quantity < 1 ? "not-allowed" : ""} ` }}
