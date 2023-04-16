@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { ObjectId } = mongoose.Schema.Types;
 
 const reviewSchema = new mongoose.Schema({
-  reviewNy: {
+  reviewBy: {
     type: ObjectId,
     ref: "User",
     required: true,

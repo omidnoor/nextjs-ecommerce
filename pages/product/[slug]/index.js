@@ -1,5 +1,5 @@
 import db from "@/utils/db";
-
+import User from "@/models/User";
 import Category from "@/models/Category";
 import SubCategory from "@/models/subCategory";
 import Product from "@/models/product";
@@ -26,6 +26,7 @@ export async function getServerSideProps(context) {
   const product = await Product.findOne({ slug })
     .populate({ path: "category", model: Category })
     .populate({ path: "subCategories._id", model: SubCategory })
+    .populate({ path: "reviews.reviewBy", model: User })
     .lean();
 
   if (!product) {

@@ -1,7 +1,9 @@
 import { useRouter } from "next/router";
 import { useSession, signIn } from "next-auth/react";
 import { Button, Rating } from "@mui/material";
+
 import AddReviews from "./AddReviews";
+import Table from "./Table";
 
 import styles from "./styles.module.scss";
 
@@ -12,6 +14,7 @@ export default function Reviews({ product }) {
   function signInHandler() {
     signIn({ callbackUrl: router.asPath });
   }
+
   return (
     <div className={styles.reviews}>
       <div className={styles.review__container}>
@@ -59,6 +62,8 @@ export default function Reviews({ product }) {
             Login to add review
           </button>
         )}
+
+        <Table reviews={product.reviews} />
       </div>
     </div>
   );

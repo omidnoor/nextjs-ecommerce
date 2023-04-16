@@ -13,7 +13,7 @@ export default function AddReviews({ product }) {
   const [style, setStyle] = useState("");
   const [fit, setFit] = useState("");
   const [review, setReview] = useState("");
-  const [rating, setRating] = useState();
+  const [rating, setRating] = useState(0);
   const [images, setImages] = useState([]);
 
   const sizeHandler = (size) => {
@@ -69,7 +69,7 @@ export default function AddReviews({ product }) {
           value={rating}
           onChange={(e) => setRating(e.target.value)}
           precision={0.5}
-          style={{ color: "faca19", fontSize: "2rem" }}
+          style={{ color: "FACA19", fontSize: "2rem" }}
         />
 
         <button className={styles.login_btn}>Submit Review</button>
