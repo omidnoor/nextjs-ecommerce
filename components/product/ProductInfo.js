@@ -1,3 +1,4 @@
+import axios from "axios";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -25,6 +26,19 @@ export default function ProductInfo({ product }) {
   useEffect(() => {
     qty > product.quantity && setQty(product.quantity);
   }, [router.query.size]);
+
+  const addToCartHandler = async () => {
+    try {
+      const { data } = await axios.get(
+        `/api/product/${product._id}?style=${product.style}&size=${
+          router.query.size ? router.query.size : ""
+        }`,
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={styles.info__container}>
@@ -129,6 +143,7 @@ export default function ProductInfo({ product }) {
         <button
           disabled={product.quantity < 1}
           style={{ cursor: `${product.quantity < 1 ? "not-allowed" : ""} ` }}
+          onClick={() => addToCartHandler()}
         >
           <BsHandbagFill />
           <b>ADD TO CART</b>

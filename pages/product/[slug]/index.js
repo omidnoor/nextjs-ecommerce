@@ -44,6 +44,7 @@ export async function getServerSideProps(context) {
 
   const newProduct = {
     ...product,
+    style,
     images: subProduct.images,
     sizes: subProduct.sizes,
     discount: subProduct.discount,
