@@ -1,12 +1,15 @@
+import CartContainer from "@/components/cart/cartContainer";
+import CartHeader from "@/components/cart/header";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 
+const cart = [];
+
 export default function Cart() {
   return (
-    <div className="">
-      <Header country="canada" />
-      cart
-      <Footer country="canada" />
-    </div>
+    <>
+      <CartHeader />
+      <CartContainer cart={cart} />
+    </>
   );
 }
