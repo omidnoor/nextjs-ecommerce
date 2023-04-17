@@ -22,7 +22,7 @@ export default function ProductInfo({ product }) {
   const [qty, setQty] = useState(1);
   const [error, setError] = useState(null);
   const { cart } = useSelector((state) => ({ ...state }));
-  console.log("Current cart state:", cart);
+
   useEffect(() => {
     setSize(router.query.size);
     setQty(1);

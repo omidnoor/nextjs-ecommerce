@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 export default function CartContainer({ cart }) {
   return (
     <div className={styles.cart}>
-      {cart.items.length > 1 ? (
+      {cart.items.length > 0 ? (
         <div className={styles.cart__container}>
           <div className={styles.cart__products}>
             {cart.items.map((item, index) => (

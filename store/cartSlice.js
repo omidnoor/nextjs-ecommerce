@@ -23,6 +23,7 @@ export const cartSlice = createSlice({
     },
     updateCart: (state, action) => {
       if (!action.payload || !action.payload._uid) return;
+      console.log(action.payload);
       const itemIndex = state.items.findIndex(
         (item) => item._uid === action.payload._uid,
       );
@@ -31,12 +32,16 @@ export const cartSlice = createSlice({
         state.items[itemIndex] = action.payload;
       }
     },
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter((item) => item._uid !== action.payload);
+    },
     emptyCart: (state) => {
       state.items = [];
     },
   },
 });
 
-export const { addToCart, updateCart, emptyCart } = cartSlice.actions;
+export const { addToCart, updateCart, removeFromCart, emptyCart } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

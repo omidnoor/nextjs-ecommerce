@@ -1,10 +1,30 @@
+import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsHeart } from "react-icons/bs";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
+import { updateCart, removeFromCart } from "@/store/cartSlice";
+
 import styles from "./styles.module.scss";
 
 export default function CartItem({ item }) {
+  const { cart } = useSelector((state) => ({ ...state }));
+  // console.log(cart);
+  const dispatch = useDispatch();
+
+  const updateQty = (type) => {
+    dispatch(
+      updateCart({
+        ...item,
+        qty: type === "plus" ? item.qty + 1 : item.qty - 1,
+      }),
+    );
+  };
+
+  const removeItem = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
   return (
     <div className={`${styles.card} ${styles.product}`}>
       {item.quantity < 1 && <div className={styles.blur}></div>}
@@ -25,7 +45,7 @@ export default function CartItem({ item }) {
             <div style={{ zIndex: "2" }}>
               <BsHeart />
             </div>
-            <div style={{ zIndex: "2" }}>
+            <div style={{ zIndex: "2" }} onClick={() => removeItem(item._uid)}>
               <AiOutlineDelete />
             </div>
           </div>
@@ -51,9 +71,19 @@ export default function CartItem({ item }) {
               )}
             </div>
             <div className={styles.product__price_qty_qty}>
-              <button disabled={item.qty < 2}>-</button>
+              <button
+                disabled={item.qty < 2}
+                onClick={() => updateQty("minus")}
+              >
+                -
+              </button>
               <span>{item.qty}</span>
-              <button disabled={item.qty === item.quantity}>+</button>
+              <button
+                disabled={item.qty === item.quantity}
+                onClick={() => updateQty("plus")}
+              >
+                +
+              </button>
             </div>
           </div>
           <div className={styles.product__shipping}>
