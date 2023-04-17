@@ -1,3 +1,4 @@
+import Checkout from "./checkout";
 import CartEmpty from "./cartEmpty";
 import CartHeaderContainer from "./cartHeader";
 import CartItem from "./cartItem";
@@ -14,6 +15,14 @@ export default function CartContainer({ cart }) {
             {cart.items.map((item, index) => (
               <CartItem key={item._uid} item={item} />
             ))}
+          </div>
+          <div className={styles.card}>
+            <Checkout
+              subtotal="5454"
+              shippingFee=""
+              total="4554"
+              selected={[]}
+            />
           </div>
         </div>
       ) : (
