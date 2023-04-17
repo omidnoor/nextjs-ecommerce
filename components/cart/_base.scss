@@ -1,0 +1,15 @@
+.card {
+  background-color: #fff;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.active {
+  background-image: url("/images/selected.png");
+  background-size: cover;
+}
+
+.header {
+  color: #222 !important;
+  font-size: 22px;
+}
