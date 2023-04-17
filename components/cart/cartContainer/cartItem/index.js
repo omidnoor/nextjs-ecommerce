@@ -15,38 +15,41 @@ export default function CartItem({ item }) {
       <div className={styles.product__image}>
         <div className={styles.checkbox}></div>
         <img src={item.images[0].url} alt="product image" />
-        <div className={styles.grid}>
-          <h2>
-            {item.name.length > 30
-              ? `${item.name.substring(0, 30)}...`
-              : item.name}
-          </h2>
-          <div style={{ zIndex: "2" }}>
-            <BsHeart />
+        <div className={styles.col}>
+          <div className={styles.grid}>
+            <h2>
+              {item.name.length > 30
+                ? `${item.name.substring(0, 30)}...`
+                : item.name}
+            </h2>
+            <div style={{ zIndex: "2" }}>
+              <BsHeart />
+            </div>
+            <div style={{ zIndex: "2" }}>
+              <AiOutlineDelete />
+            </div>
           </div>
-          <div style={{ zIndex: "2" }}>
-            <AiOutlineDelete />
+
+          <div className={styles.product__style}>
+            <img src={item.color.image} alt="product style" />
+            {item.size && <span>{item.size.size}</span>}
+            {item.size && <span>{item.size.price}$</span>}
+            <MdOutlineKeyboardArrowRight />
           </div>
-        </div>
-        <div className={styles.product__style}>
-          <img src={item.color.image} alt="product style" />
-          {item.size && <span>{item.size.size}</span>}
-          {item.size && <span>{item.size.price}$</span>}
-          <MdOutlineKeyboardArrowRight />
-        </div>
-        <div className={styles.product__price_qty}>
-          <div className={styles.product__price_qty_price}>
-            <span className={styles.price}>
-              CAD{(item.price * item.qty).toFixed(2)}
-            </span>
-            {item.price !== item.priceBefore && (
-              <span className={styles.price_before}>
-                CAD{(item.priceBefore * item.qty).toFixed(2)}
+          <div className={styles.product__price_qty}>
+            <div className={styles.product__price_qty_price}>
+              <span className={styles.price}>
+                CAD{(item.price * item.qty).toFixed(2)}
               </span>
-            )}
-            {item.discount > 0 && (
-              <span className={styles.discount}>-{item.discount}%</span>
-            )}
+              {item.price !== item.priceBefore && (
+                <span className={styles.price_before}>
+                  CAD{(item.priceBefore * item.qty).toFixed(2)}
+                </span>
+              )}
+              {item.discount > 0 && (
+                <span className={styles.discount}>-{item.discount}%</span>
+              )}
+            </div>
             <div className={styles.product__price_qty_qty}>
               <button disabled={item.qty < 2}>-</button>
               <span>{item.qty}</span>
@@ -54,9 +57,7 @@ export default function CartItem({ item }) {
             </div>
           </div>
           <div className={styles.product__shipping}>
-            {item.shipping
-              ? `+${item.shipping}$ shipping fee`
-              : "Free shipping"}
+            {item.shipping ? `${item.shipping}$ shipping fee` : "Free shipping"}
           </div>
           {item.quantity < 1 && (
             <div className={styles.empty_stock}>

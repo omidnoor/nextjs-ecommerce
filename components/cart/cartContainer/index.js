@@ -8,10 +8,11 @@ export default function CartContainer({ cart }) {
     <div className={styles.cart}>
       {cart.items.length > 1 ? (
         <div className={styles.cart__container}>
-          .{styles.cart__products}
-          {cart.items.map((item, index) => (
-            <CartItem key={item._uid} item={item} />
-          ))}
+          <div className={styles.cart__products}>
+            {cart.items.map((item, index) => (
+              <CartItem key={item._uid} item={item} />
+            ))}
+          </div>
         </div>
       ) : (
         <CartEmpty />
