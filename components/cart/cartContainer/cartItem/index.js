@@ -59,11 +59,11 @@ export default function CartItem({ item }) {
           <div className={styles.product__price_qty}>
             <div className={styles.product__price_qty_price}>
               <span className={styles.price}>
-                CAD{(item.price * item.qty).toFixed(2)}
+                CAD{(item.price * item.qty).toFixed(2)}$
               </span>
               {item.price !== item.priceBefore && (
                 <span className={styles.price_before}>
-                  CAD{(item.priceBefore * item.qty).toFixed(2)}
+                  CAD{(item.priceBefore * item.qty).toFixed(2)}$
                 </span>
               )}
               {item.discount > 0 && (

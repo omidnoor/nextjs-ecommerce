@@ -1,0 +1,20 @@
+@import "../../base";
+
+.cart {
+  .flex {
+    gap: 10px;
+    cursor: pointer;
+    .checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    &:hover {
+      .checkbox {
+        border-color: $light-blue-color;
+      }
+    }
+  }
+}

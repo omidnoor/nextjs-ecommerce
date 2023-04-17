@@ -13,6 +13,7 @@
       "method";
     color: #222;
     max-width: 1300px;
+    margin: 0 auto;
     @media (min-width: 900px) {
       grid-template-areas:
         "header checkout"
