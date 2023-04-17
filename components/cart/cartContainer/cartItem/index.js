@@ -34,6 +34,36 @@ export default function CartItem({ item }) {
           {item.size && <span>{item.size.price}$</span>}
           <MdOutlineKeyboardArrowRight />
         </div>
+        <div className={styles.product__price_qty}>
+          <div className={styles.product__price_qty_price}>
+            <span className={styles.price}>
+              CAD{(item.price * item.qty).toFixed(2)}
+            </span>
+            {item.price !== item.priceBefore && (
+              <span className={styles.price_before}>
+                CAD{(item.priceBefore * item.qty).toFixed(2)}
+              </span>
+            )}
+            {item.discount > 0 && (
+              <span className={styles.discount}>-{item.discount}%</span>
+            )}
+            <div className={styles.product__price_qty_qty}>
+              <button disabled={item.qty < 2}>-</button>
+              <span>{item.qty}</span>
+              <button disabled={item.qty === item.quantity}>+</button>
+            </div>
+          </div>
+          <div className={styles.product__shipping}>
+            {item.shipping
+              ? `+${item.shipping}$ shipping fee`
+              : "Free shipping"}
+          </div>
+          {item.quantity < 1 && (
+            <div className={styles.empty_stock}>
+              This product is out of stock.
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
