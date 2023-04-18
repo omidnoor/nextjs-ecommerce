@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsHeart } from "react-icons/bs";
+import { useEffect, useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 import { updateCart, removeFromCart } from "@/store/cartSlice";
 
 import styles from "./styles.module.scss";
 
-export default function CartItem({ item }) {
+export default function CartItem({ item, selected, setSelected }) {
   const { cart } = useSelector((state) => ({ ...state }));
-  // console.log(cart);
+  const [active, setActive] = useState(false);
   const dispatch = useDispatch();
 
   const updateQty = (type) => {
@@ -25,6 +26,20 @@ export default function CartItem({ item }) {
     dispatch(removeFromCart(id));
   };
 
+  useEffect(() => {
+    const check = selected.find((p) => p._uid === item._uid);
+    setActive(check);
+  }, [selected]);
+
+  const onSelectHandler = () => {
+    const check = selected.find((p) => p._uid === item._uid);
+    if (check) {
+      setSelected(selected.filter((p) => p._uid !== item._uid));
+    } else {
+      setSelected([...selected, item]);
+    }
+  };
+
   return (
     <div className={`${styles.card} ${styles.product}`}>
       {item.quantity < 1 && <div className={styles.blur}></div>}
@@ -33,7 +48,10 @@ export default function CartItem({ item }) {
       </div>
 
       <div className={styles.product__image}>
-        <div className={styles.checkbox}></div>
+        <div
+          className={`${styles.checkbox} ${active ? styles.active : ""}`}
+          onClick={() => onSelectHandler()}
+        ></div>
         <img src={item.images[0].url} alt="product image" />
         <div className={styles.col}>
           <div className={styles.grid}>

@@ -7,6 +7,8 @@
 .active {
   background-image: url("/images/selected.png");
   background-size: cover;
+  transform: scale(105%);
+  z-index: 500;
 }
 
 .header {
