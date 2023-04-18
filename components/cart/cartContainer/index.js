@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import Checkout from "./checkout";
 import CartEmpty from "./cartEmpty";
@@ -8,6 +9,28 @@ import styles from "./styles.module.scss";
 
 export default function CartContainer({ cart }) {
   const [selected, setSelected] = useState([]);
+  const [shipping, setShipping] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const shippingValue = selected
+      ?.reduce((acc, item) => acc + Number(item.shipping), 0)
+      .toFixed(2);
+
+    const subtotalValue = selected
+      ?.reduce((acc, item) => acc + item.price * item.qty, 0)
+      .toFixed(2);
+
+    setShipping(shippingValue);
+    setSubtotal(subtotalValue);
+
+    const totalValue = (
+      parseFloat(subtotalValue) + parseFloat(shippingValue)
+    ).toFixed(2);
+
+    setTotal(totalValue);
+  }, [selected]);
 
   return (
     <div className={styles.cart}>
@@ -32,10 +55,10 @@ export default function CartContainer({ cart }) {
           {/* </div> */}
           <div className={styles.cart__checkout}>
             <Checkout
-              subtotal="5454"
-              shippingFee={0}
-              total="4554"
-              selected={[]}
+              subtotal={subtotal}
+              shippingFee={shipping}
+              total={total}
+              selected={selected}
             />
           </div>
         </div>

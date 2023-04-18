@@ -6,7 +6,7 @@ export default function Checkout({ subtotal, shippingFee, total, selected }) {
       <h2>Order Summary</h2>
       <div className={styles.checkout_line}>
         <span>Subtotal</span>
-        <span>CAD{subtotal}$</span>
+        <span>CAD {subtotal}$</span>
       </div>
       <div className={styles.checkout_line}>
         <span>Shipping</span>
@@ -14,10 +14,18 @@ export default function Checkout({ subtotal, shippingFee, total, selected }) {
       </div>
       <div className={styles.checkout_total}>
         <span>Total</span>
-        <span>CAD{total}$</span>
+        <span>CAD {total}$</span>
       </div>
       <div className={styles.submit}>
-        <button>Continue</button>
+        <button
+          disabled={selected.length === 0}
+          style={{
+            backgroundColor: `${selected.length === 0 ? "#999" : ""}`,
+            cursor: `${selected.length === 0 ? "not-allowed" : ""}`,
+          }}
+        >
+          Continue
+        </button>
       </div>
     </div>
   );
