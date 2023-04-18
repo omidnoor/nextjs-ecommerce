@@ -1,0 +1,40 @@
+@import "../../base.scss";
+
+.method {
+  h3 {
+    margin-top: 10px;
+    font-size: 10px;
+  }
+}
+
+.images {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #f8f8f8;
+  padding: 1rem;
+
+  img {
+    width: 40px;
+  }
+}
+
+.protection {
+  margin-top: 5px;
+  display: flex;
+  gap: 10px;
+  font-weight: 600;
+  color: #222;
+  font-size: 16px;
+
+  img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+  }
+}
+
+.header {
+  color: #222;
+}

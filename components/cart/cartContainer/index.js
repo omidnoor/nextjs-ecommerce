@@ -1,17 +1,36 @@
+import { useRouter } from "next/router";
+import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useState } from "react";
+
 import Checkout from "./checkout";
 import CartEmpty from "./cartEmpty";
 import CartHeaderContainer from "./cartHeader";
 import CartItem from "./cartItem";
+import PaymentMethods from "./paymentMenthods";
+import { saveCart } from "@/requests/user";
 
 import styles from "./styles.module.scss";
 
 export default function CartContainer({ cart }) {
+  const router = useRouter();
+  const { data: session } = useSession();
   const [selected, setSelected] = useState([]);
   const [shipping, setShipping] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
+
+  const saveCartToDbHandler = async () => {
+    try {
+      if (session) {
+        const res = await saveCart(selected, session.user.id);
+      } else {
+        signIn();
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   useEffect(() => {
     const shippingValue = selected
@@ -36,7 +55,6 @@ export default function CartContainer({ cart }) {
     <div className={styles.cart}>
       {cart.items.length > 0 ? (
         <div className={styles.cart__container}>
-          {/* <div className={styles.cart_container_inner}> */}
           <CartHeaderContainer
             items={cart.items}
             selected={selected}
@@ -52,14 +70,18 @@ export default function CartContainer({ cart }) {
               />
             ))}
           </div>
-          {/* </div> */}
+
           <div className={styles.cart__checkout}>
             <Checkout
               subtotal={subtotal}
               shippingFee={shipping}
               total={total}
               selected={selected}
+              saveCartToDbHandler={saveCartToDbHandler}
             />
+          </div>
+          <div className={styles.cart__method}>
+            <PaymentMethods />
           </div>
         </div>
       ) : (

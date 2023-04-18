@@ -1,6 +1,12 @@
 import styles from "./styles.module.scss";
 
-export default function Checkout({ subtotal, shippingFee, total, selected }) {
+export default function Checkout({
+  subtotal,
+  shippingFee,
+  total,
+  selected,
+  saveCartToDbHandler,
+}) {
   return (
     <div className={`${styles.checkout} ${styles.card}`}>
       <h2>Order Summary</h2>
@@ -23,6 +29,7 @@ export default function Checkout({ subtotal, shippingFee, total, selected }) {
             backgroundColor: `${selected.length === 0 ? "#999" : ""}`,
             cursor: `${selected.length === 0 ? "not-allowed" : ""}`,
           }}
+          onClick={() => saveCartToDbHandler()}
         >
           Continue
         </button>
