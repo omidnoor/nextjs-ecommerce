@@ -3,16 +3,17 @@ import db from "@/utils/db";
 import User from "@/models/User";
 import Cart from "@/models/cart";
 import Product from "@/models/product";
+import auth from "@/middleware/auth";
 
-const handler = nc();
+const handler = nc().use(auth);
 
 handler.post(async (req, res) => {
   try {
     await db.connectDb();
-    const { cart, user_id } = req.body;
+    const { cart } = req.body;
     // console.log(cart);
     let products = [];
-    let user = await User.findById(user_id);
+    let user = await User.findById(req.user);
     let existCart = await Cart.findOne({ user: user_id });
     if (existCart) {
       await existCart.remove();

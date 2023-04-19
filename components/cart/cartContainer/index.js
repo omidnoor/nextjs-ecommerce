@@ -46,7 +46,7 @@ export default function CartContainer({ cart }) {
   const saveCartToDbHandler = async () => {
     try {
       if (session) {
-        const res = await saveCart(selected, session.user.id);
+        const res = await saveCart(selected);
       } else {
         signIn();
       }
