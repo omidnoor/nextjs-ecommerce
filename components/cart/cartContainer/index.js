@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -11,14 +13,35 @@ import PaymentMethods from "./paymentMenthods";
 import { saveCart } from "@/requests/user";
 
 import styles from "./styles.module.scss";
+import { updateCart } from "@/store/cartSlice";
 
 export default function CartContainer({ cart }) {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { data: session } = useSession();
   const [selected, setSelected] = useState([]);
   const [shipping, setShipping] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const update = async () => {
+      try {
+        const { data: responseData } = await axios.post("/api/updateCart", {
+          products: cart.items,
+        });
+
+        responseData.data.forEach((item) => {
+          dispatch(updateCart(item));
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    if (cart.items.length > 0) {
+      update();
+    }
+  }, []);
 
   const saveCartToDbHandler = async () => {
     try {
@@ -33,7 +56,7 @@ export default function CartContainer({ cart }) {
   };
 
   useEffect(() => {
-    const shippingValue = selected
+    const shipping = selected
       ?.reduce((acc, item) => acc + Number(item.shipping), 0)
       .toFixed(2);
 
@@ -41,11 +64,11 @@ export default function CartContainer({ cart }) {
       ?.reduce((acc, item) => acc + item.price * item.qty, 0)
       .toFixed(2);
 
-    setShipping(shippingValue);
+    setShipping(shipping);
     setSubtotal(subtotalValue);
 
     const totalValue = (
-      parseFloat(subtotalValue) + parseFloat(shippingValue)
+      parseFloat(subtotalValue) + parseFloat(shipping)
     ).toFixed(2);
 
     setTotal(totalValue);
@@ -74,7 +97,7 @@ export default function CartContainer({ cart }) {
           <div className={styles.cart__checkout}>
             <Checkout
               subtotal={subtotal}
-              shippingFee={shipping}
+              shipping={shipping}
               total={total}
               selected={selected}
               saveCartToDbHandler={saveCartToDbHandler}

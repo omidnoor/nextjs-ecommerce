@@ -10,6 +10,7 @@ handler.post(async (req, res) => {
   try {
     await db.connectDb();
     const { cart, user_id } = req.body;
+    // console.log(cart);
     let products = [];
     let user = await User.findById(user_id);
     let existCart = await Cart.findOne({ user: user_id });
@@ -29,7 +30,7 @@ handler.post(async (req, res) => {
       };
       tempProduct.qty = Number(cart[i].qty);
       tempProduct.size = cart[i].size;
-      console.log(cart[i].size.size);
+      // console.log(cart[i].size.size);
       let price = Number(
         subProduct.sizes.find((p) => {
           return p.size === cart[i].size.size;

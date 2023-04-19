@@ -10,7 +10,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       // console.log("addToCart action:", action);
-      if (!action.payload || !action.payload._uid) return;
+      if (!action.payload) return;
       const itemIndex = state.items.findIndex(
         (item) => item._uid === action.payload._uid,
       );
@@ -22,8 +22,9 @@ export const cartSlice = createSlice({
       }
     },
     updateCart: (state, action) => {
-      if (!action.payload || !action.payload._uid) return;
-      console.log(action.payload);
+      // console.log("Received action:", action.payload);
+      if (!action.payload) return;
+      // console.log(action.payload);
       const itemIndex = state.items.findIndex(
         (item) => item._uid === action.payload._uid,
       );

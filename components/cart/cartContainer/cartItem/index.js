@@ -71,7 +71,7 @@ export default function CartItem({ item, selected, setSelected }) {
           <div className={styles.product__style}>
             <img src={item.color.image} alt="product style" />
             {item.size && <span>{item.size.size}</span>}
-            {item.size && <span>{item.size.price}$</span>}
+            {item.size && <span>{item.price}$</span>}
             <MdOutlineKeyboardArrowRight />
           </div>
           <div className={styles.product__price_qty}>

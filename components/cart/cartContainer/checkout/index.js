@@ -2,7 +2,7 @@ import styles from "./styles.module.scss";
 
 export default function Checkout({
   subtotal,
-  shippingFee,
+  shipping,
   total,
   selected,
   saveCartToDbHandler,
@@ -16,7 +16,7 @@ export default function Checkout({
       </div>
       <div className={styles.checkout_line}>
         <span>Shipping</span>
-        <span>+{shippingFee}$</span>
+        <span>+{Number(shipping)}$</span>
       </div>
       <div className={styles.checkout_total}>
         <span>Total</span>
