@@ -8,7 +8,6 @@ import Router from "next/router";
 
 import { BiLeftArrowAlt } from "react-icons/bi";
 
-import styles from "../styles/signin.module.scss";
 import LoginInput from "@/components/inputs/loginInput";
 import CircledIconBtn from "@/components/buttons/circledIconBtn";
 import {
@@ -19,6 +18,8 @@ import {
 } from "next-auth/react";
 import axios from "axios";
 import RingLoaderSpinner from "@/components/loaders/ringloader";
+
+import styles from "../styles/signin.module.scss";
 
 const initialValues = {
   login_email: "",
