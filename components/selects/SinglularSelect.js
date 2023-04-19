@@ -27,8 +27,8 @@ export default function SinglularSelect({
         <MenuItem key={""} value={""}>
           No Selected / Or Empty
         </MenuItem>
-        {data.map((country) => (
-          <MenuItem key={country._id} value={country.name}>
+        {data.map((country, index) => (
+          <MenuItem key={index} value={country.name}>
             {country.name}
           </MenuItem>
         ))}

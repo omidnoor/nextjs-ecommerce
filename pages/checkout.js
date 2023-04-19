@@ -11,7 +11,6 @@ import styles from "../styles/checkout.module.scss";
 
 export default function checkout({ cart, user }) {
   const [selectedAddress, setSelectedAddress] = useState(null);
-
   return (
     <>
       <Header />
