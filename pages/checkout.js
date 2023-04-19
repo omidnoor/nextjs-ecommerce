@@ -15,7 +15,7 @@ export default function checkout({ cart, user }) {
   return (
     <>
       <Header />
-      <div className={styles.checkout}>
+      <div className={`${styles.checkout} ${styles.container}`}>
         <div className={styles.checkout__side}>
           <Shipping
             selectedAddress={selectedAddress}
@@ -31,7 +31,7 @@ export default function checkout({ cart, user }) {
 export async function getServerSideProps(context) {
   await db.connectDb();
   const session = await getSession(context);
-  const user = await User.findById(session.user.id);
+  const user = await User.findById(session?.user.id);
   const cart = await Cart.findOne({ user: user._id });
   await db.disconnectDb();
   // console.log(cart);
