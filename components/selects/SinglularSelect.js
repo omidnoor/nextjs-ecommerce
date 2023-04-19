@@ -9,8 +9,8 @@ export default function SinglularSelect({
   placeholder,
   ...rest
 }) {
-  const [field, meta] = useField(data);
-  console.log(meta.error);
+  const [field, meta] = useField(rest);
+
   return (
     <div style={{ paddingBottom: "16px" }}>
       <TextField
@@ -21,14 +21,14 @@ export default function SinglularSelect({
         value={field.value}
         onChange={onChangeHandler}
         className={`${styles.select} ${
-          meta.error && meta.touched && styles.error_select
+          meta.touched && meta.error && styles.error_select
         }`}
       >
         <MenuItem key={""} value={""}>
           No Selected / Or Empty
         </MenuItem>
         {data.map((country) => (
-          <MenuItem key={country.value} value={country.value}>
+          <MenuItem key={country._id} value={country.name}>
             {country.name}
           </MenuItem>
         ))}

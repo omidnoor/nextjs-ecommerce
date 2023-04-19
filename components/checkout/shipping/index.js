@@ -5,9 +5,10 @@ import { Form, Formik } from "formik";
 
 import { countries } from "@/data/countries";
 import ShippingInput from "@/components/inputs/shippingInputs";
+import SinglularSelect from "@/components/selects/SinglularSelect";
+import { saveAddress } from "@/requests/user";
 
 import styles from "./styles.module.scss";
-import SinglularSelect from "@/components/selects/SinglularSelect";
 
 const initialValues = {
   firstName: "",
@@ -38,18 +39,17 @@ const validate = Yup.object({
     .min(3, "Last name must be atleast 3 characters long.")
     .max(20, "Last name must be less than 20 characters long."),
   phoneNumber: Yup.string()
-    .phone()
     .required("Phone number is required.")
     .min(3, "Phone number must be atleast 3 characters long.")
     .max(30, "Phone number must be less than 20 characters long."),
   state: Yup.string()
-    .required("State name is required.")
-    .min(2, "State name should contain 2-60 characters..")
-    .max(60, "State name should contain 2-60 characters."),
+    .required("State is required.")
+    .min(2, "State should contain 2-60 characters..")
+    .max(60, "State should contain 2-60 characters."),
   city: Yup.string()
-    .required("City name is required.")
-    .min(2, "City name should contain 2-60 characters.")
-    .max(60, "City name should contain 2-60 characters."),
+    .required("City is required.")
+    .min(2, "City should contain 2-60 characters.")
+    .max(60, "City should contain 2-60 characters."),
   zipCode: Yup.string()
     .required("ZipCode/Postal is required.")
     .min(2, "ZipCode/Postal should contain 2-30 characters..")
@@ -61,7 +61,7 @@ const validate = Yup.object({
   address2: Yup.string()
     .min(5, "Address Line 2 should contain 5-100 characters.")
     .max(100, "Address Line 2 should contain 5-100 characters."),
-  country: Yup.string().required("Country name is required."),
+  country: Yup.string().required("Country is required."),
 });
 
 export default function Shipping({
@@ -69,7 +69,7 @@ export default function Shipping({
   setSelectedAddress,
   user,
 }) {
-  const [address, setAddress] = useState(user?.address || []);
+  const [addresses, setAddresses] = useState(user?.address || []);
   const [shipping, setShipping] = useState(initialValues);
 
   const {
@@ -89,6 +89,14 @@ export default function Shipping({
     setShipping({ ...shipping, [name]: value });
   };
 
+  const saveShippingHandler = async (e) => {
+    const res = await saveAddress(shipping, user._id);
+    // console.log(res);
+    setAddresses([...addresses, res]);
+    setSelectedAddress(res);
+    // console.log(selectedAddress);
+  };
+
   return (
     <div className={styles.shipping}>
       <Formik
@@ -105,17 +113,10 @@ export default function Shipping({
           phoneNumber,
         }}
         validationSchema={validate}
+        onSubmit={() => saveShippingHandler()}
       >
         {(formik) => (
           <Form>
-            <SinglularSelect
-              name="country"
-              value={country}
-              placeholder="Country"
-              handlerChange={onChangeHandler}
-              data={countries}
-            />
-
             <div className={styles.col}>
               <ShippingInput
                 name="firstName"
@@ -148,6 +149,14 @@ export default function Shipping({
               name="phoneNumber"
               placeholder="Phone Number"
               onChange={onChangeHandler}
+            />
+
+            <SinglularSelect
+              name="country"
+              value={country}
+              placeholder="Country"
+              onChangeHandler={onChangeHandler}
+              data={countries}
             />
 
             <ShippingInput
