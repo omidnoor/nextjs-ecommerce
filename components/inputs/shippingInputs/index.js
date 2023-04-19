@@ -21,7 +21,7 @@ export default function ShippingInput({ placeholder, ...props }) {
   return (
     <div
       className={`${styles.input} ${
-        meta.error && meta.touched && styles.input__error
+        meta.error && meta.touched && styles.error_input
       }`}
     >
       <div

@@ -33,10 +33,10 @@
   transform: translateY(-10px);
 }
 
-.input__error {
+.error_input {
   input {
-    background-color: rgba(255, 0, 0, 0.31);
-    border: 1px solid #cc674f;
+    background-color: rgba(255, 0, 0, 0.031);
+    // border: 1px solid #cc674f;
   }
 
   p {

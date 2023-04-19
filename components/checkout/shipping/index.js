@@ -2,12 +2,12 @@ import { useState } from "react";
 import * as Yup from "yup";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { Form, Formik } from "formik";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 import { countries } from "@/data/countries";
 import ShippingInput from "@/components/inputs/shippingInputs";
 
 import styles from "./styles.module.scss";
+import SinglularSelect from "@/components/selects/SinglularSelect";
 
 const initialValues = {
   firstName: "",
@@ -108,24 +108,13 @@ export default function Shipping({
       >
         {(formik) => (
           <Form>
-            <FormControl className={styles.select}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Country
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                value={country}
-                name="country"
-                onChange={onChangeHandler}
-              >
-                {countries.map((country) => (
-                  <MenuItem value={country.name} key={country.name}>
-                    {country.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <SinglularSelect
+              name="country"
+              value={country}
+              placeholder="Country"
+              handlerChange={onChangeHandler}
+              data={countries}
+            />
 
             <div className={styles.col}>
               <ShippingInput
