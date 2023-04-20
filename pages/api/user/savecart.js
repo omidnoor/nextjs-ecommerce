@@ -14,23 +14,24 @@ handler.post(async (req, res) => {
     // console.log(cart);
     let products = [];
     let user = await User.findById(req.user);
-    let existCart = await Cart.findOne({ user: user_id });
+    let existCart = await Cart.findOne({ user: user._id });
     if (existCart) {
-      await existCart.remove();
+      await Cart.deleteOne({ user: user._id });
     }
     for (let i = 0; i < cart.length; i++) {
       const dbProduct = await Product.findById(cart[i]._id).lean();
       const subProduct = dbProduct.subProducts[cart[i].style];
+
       let tempProduct = {};
       tempProduct.name = dbProduct.name;
-      tempProduct.price = dbProduct.price;
+      // tempProduct.price = dbProduct.price;
       tempProduct.image = subProduct.images[0].url;
       tempProduct.color = {
         color: cart[i].color.color,
         image: cart[i].color.image,
       };
       tempProduct.qty = Number(cart[i].qty);
-      tempProduct.size = cart[i].size;
+      tempProduct.size = cart[i].size.size;
       // console.log(cart[i].size.size);
       let price = Number(
         subProduct.sizes.find((p) => {
@@ -39,8 +40,8 @@ handler.post(async (req, res) => {
       );
       tempProduct.price =
         subProduct.discount > 0
-          ? price - price * Number(subProduct.discount / 100).toFixed(2)
-          : price.toFixed(2);
+          ? Number((price - price * (subProduct.discount / 100)).toFixed(2))
+          : Number(price.toFixed(2));
 
       products.push(tempProduct);
     }
@@ -53,6 +54,7 @@ handler.post(async (req, res) => {
       products: products,
       cartTotal: cartTotal.toFixed(2),
     }).save();
+
     res.status(200).json({ message: "Cart saved successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });

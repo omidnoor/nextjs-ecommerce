@@ -7,6 +7,7 @@ import Cart from "@/models/cart";
 import db from "@/utils/db";
 import Header from "@/components/cart/header";
 import Shipping from "@/components/checkout/shipping";
+import Products from "@/components/checkout/products";
 
 import styles from "../styles/checkout.module.scss";
 
@@ -17,6 +18,7 @@ export default function checkout({ cart, user }) {
       <div className={`${styles.checkout} ${styles.container}`}>
         <div className={styles.checkout__side}>
           <Shipping user={user} />
+          <Products cart={cart} />
         </div>
       </div>
     </>
