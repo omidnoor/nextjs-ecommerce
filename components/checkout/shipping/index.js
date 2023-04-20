@@ -97,6 +97,7 @@ export default function Shipping({ user }) {
     if (res && res.addresses) {
       setAddresses(res.addresses);
     }
+    setShipping(initialValues);
   };
 
   const changeActiveHandler = async (id) => {
@@ -115,6 +116,9 @@ export default function Shipping({ user }) {
 
   return (
     <div className={styles.shipping}>
+      <div className={styles.header}>
+        <h1>Shipping Information</h1>
+      </div>
       <div className={styles.addresses}>
         {addresses.map((address, index) => (
           <div
