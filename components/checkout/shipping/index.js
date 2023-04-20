@@ -8,7 +8,7 @@ import { IoMdArrowDropupCircle } from "react-icons/io";
 import { countries } from "@/data/countries";
 import ShippingInput from "@/components/inputs/shippingInputs";
 import SinglularSelect from "@/components/selects/SinglularSelect";
-import { saveAddress } from "@/requests/user";
+import { changeActive, saveAddress } from "@/requests/user";
 import { GiPhone } from "react-icons/gi";
 
 import styles from "./styles.module.scss";
@@ -68,12 +68,7 @@ const validate = Yup.object({
   country: Yup.string().required("Country is required."),
 });
 
-export default function Shipping({
-  selectedAddress,
-  setSelectedAddress,
-  user,
-}) {
-  const [addresses, setAddresses] = useState(user?.address || []);
+export default function Shipping({ user, addresses, setAddresses }) {
   const [shipping, setShipping] = useState(initialValues);
   const [visible, setVisible] = useState(!user?.address.length);
   const {
@@ -90,14 +85,20 @@ export default function Shipping({
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setShipping({ ...shipping, [name]: value });
   };
 
-  const saveShippingHandler = async (e) => {
+  const saveShippingHandler = async () => {
     const res = await saveAddress(shipping);
     // console.log(res);
-    setAddresses([...addresses, res]);
-    setSelectedAddress(res);
+    setAddresses(res.addresses);
+  };
+
+  const changeActiveHandler = async (id) => {
+    const res = await changeActive(id);
+    // console.log(res);
+    setAddresses(res.addresses);
   };
 
   return (
@@ -106,9 +107,8 @@ export default function Shipping({
         {addresses.map((address, index) => (
           <div
             key={index}
-            className={`${styles.address} ${
-              address.active ? styles.active : ""
-            }`}
+            className={`${styles.address} ${address.active && styles.active}`}
+            onClick={() => changeActiveHandler(address._id)}
           >
             <div className={styles.address__side}>
               <img src={user.image} alt="user image" />
@@ -137,7 +137,7 @@ export default function Shipping({
             <span
               className={styles.active_text}
               style={{
-                display: `${!address.active ? "none" : ""}`,
+                display: `${!address.active ? "none" : "block"}`,
               }}
             >
               Active

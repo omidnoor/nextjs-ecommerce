@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { getSession } from "next-auth/react";
 
@@ -10,16 +11,17 @@ import Shipping from "@/components/checkout/shipping";
 import styles from "../styles/checkout.module.scss";
 
 export default function checkout({ cart, user }) {
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [addresses, setAddresses] = useState(user?.address || []);
+
   return (
     <>
       <Header />
       <div className={`${styles.checkout} ${styles.container}`}>
         <div className={styles.checkout__side}>
           <Shipping
-            selectedAddress={selectedAddress}
-            setSelectedAddress={setSelectedAddress}
             user={user}
+            addresses={addresses}
+            setAddresses={setAddresses}
           />
         </div>
       </div>

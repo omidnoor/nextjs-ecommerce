@@ -12,13 +12,20 @@ handler.post(async (req, res) => {
     await db.connectDb();
     const { address } = req.body;
     const user = User.findById(req.user);
-    await user.updateOne({
-      $push: {
-        address: address,
-      },
-    });
 
-    res.status(200).json(address);
+    try {
+      const newUserData = await user.updateOne(
+        {
+          $push: {
+            address: address,
+          },
+        },
+        { new: true },
+      );
+      return res.status(200).json({ addresses: user.address });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   } finally {
