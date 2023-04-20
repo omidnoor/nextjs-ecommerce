@@ -11,18 +11,12 @@ import Shipping from "@/components/checkout/shipping";
 import styles from "../styles/checkout.module.scss";
 
 export default function checkout({ cart, user }) {
-  const [addresses, setAddresses] = useState(user?.address || []);
-
   return (
     <>
       <Header />
       <div className={`${styles.checkout} ${styles.container}`}>
         <div className={styles.checkout__side}>
-          <Shipping
-            user={user}
-            addresses={addresses}
-            setAddresses={setAddresses}
-          />
+          <Shipping user={user} />
         </div>
       </div>
     </>

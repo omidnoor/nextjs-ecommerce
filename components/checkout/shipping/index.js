@@ -4,11 +4,12 @@ import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { Form, Formik } from "formik";
 import { FaIdCard, FaMapMarkerAlt } from "react-icons/fa";
 import { IoMdArrowDropupCircle } from "react-icons/io";
+import { CgRemove } from "react-icons/cg";
 
 import { countries } from "@/data/countries";
 import ShippingInput from "@/components/inputs/shippingInputs";
 import SinglularSelect from "@/components/selects/SinglularSelect";
-import { changeActive, saveAddress } from "@/requests/user";
+import { changeActive, deleteAddress, saveAddress } from "@/requests/user";
 import { GiPhone } from "react-icons/gi";
 
 import styles from "./styles.module.scss";
@@ -68,9 +69,10 @@ const validate = Yup.object({
   country: Yup.string().required("Country is required."),
 });
 
-export default function Shipping({ user, addresses, setAddresses }) {
+export default function Shipping({ user }) {
   const [shipping, setShipping] = useState(initialValues);
   const [visible, setVisible] = useState(!user?.address.length);
+  const [addresses, setAddresses] = useState(user?.address || []);
   const {
     firstName,
     lastName,
@@ -85,18 +87,28 @@ export default function Shipping({ user, addresses, setAddresses }) {
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+    // console.log(name, value);
     setShipping({ ...shipping, [name]: value });
   };
 
   const saveShippingHandler = async () => {
     const res = await saveAddress(shipping);
-    // console.log(res);
-    setAddresses(res.addresses);
+    console.log(res);
+    if (res && res.addresses) {
+      setAddresses(res.addresses);
+    }
   };
 
   const changeActiveHandler = async (id) => {
     const res = await changeActive(id);
+    // console.log(res);
+    if (res && res.addresses) {
+      setAddresses(res.addresses);
+    }
+  };
+
+  const deleteHandler = async (id) => {
+    const res = await deleteAddress(id);
     // console.log(res);
     setAddresses(res.addresses);
   };
@@ -110,6 +122,12 @@ export default function Shipping({ user, addresses, setAddresses }) {
             className={`${styles.address} ${address.active && styles.active}`}
             onClick={() => changeActiveHandler(address._id)}
           >
+            <div
+              className={styles.address__delete}
+              onClick={() => deleteHandler(address._id)}
+            >
+              <CgRemove />
+            </div>
             <div className={styles.address__side}>
               <img src={user.image} alt="user image" />
             </div>

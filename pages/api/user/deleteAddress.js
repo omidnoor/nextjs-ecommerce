@@ -7,24 +7,21 @@ import auth from "@/middleware/auth";
 
 const handler = nc().use(auth);
 
-handler.post(async (req, res) => {
+handler.delete(async (req, res) => {
   try {
     await db.connectDb();
-    const { address } = req.body;
-    const user = await User.findById(req.user);
-
+    const { id } = req.body;
     try {
-      await user.updateOne(
+      const newUserData = await User.findByIdAndUpdate(
+        req.user,
         {
-          $push: {
-            address: address,
+          $pull: {
+            address: { _id: id },
           },
         },
         { new: true },
       );
-
-      const updatedUser = await User.findById(req.user);
-      res.status(200).json({ addresses: updatedUser.address });
+      return res.status(200).json({ addresses: newUserData.address });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
