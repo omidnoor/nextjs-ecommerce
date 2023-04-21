@@ -11,7 +11,14 @@ const handler = nc().use(auth);
 handler.post(async (req, res) => {
   try {
     await db.connectDb();
-    const { products, shippingAddress, paymentMethod, total } = req.body;
+    const {
+      products,
+      shippingAddress,
+      paymentMethod,
+      total,
+      totalBeforeDiscount,
+      couponApplied,
+    } = req.body;
     const user = await User.findById(req.user);
     const newOrder = await Order({
       user: user._id,
@@ -19,6 +26,8 @@ handler.post(async (req, res) => {
       shippingAddress,
       paymentMethod,
       total,
+      totalBeforeDiscount,
+      couponApplied,
     }).save();
 
     res.json({ order_id: newOrder._id });
