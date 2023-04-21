@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
@@ -6,6 +7,7 @@ import ShippingInput from "@/components/inputs/shippingInputs";
 import { applyCoupon } from "@/requests/user";
 
 import styles from "./styles.module.scss";
+import axios from "axios";
 
 export default function Summary({
   user,
@@ -15,9 +17,11 @@ export default function Summary({
   paymentMethod,
   selectedAddress,
 }) {
+  const router = useRouter();
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
   const [error, setError] = useState(null);
+  const [errorOrder, setErrorOrder] = useState(null);
   const validateCoupon = Yup.object({
     coupon: Yup.string().required("Coupon is required"),
   });
@@ -37,7 +41,24 @@ export default function Summary({
     }
   };
 
-  const placeOrderHandler = async () => {};
+  const placeOrderHandler = async () => {
+    try {
+      if (!paymentMethod)
+        return setErrorOrder("Please select a payment method");
+      if (!selectedAddress) return setErrorOrder("Please select an address");
+
+      const data = await axios.post("/api/order/create", {
+        products: cart.products,
+        shippingAddress: selectedAddress,
+        paymentMethod,
+        total: totalAfterDiscount != "" ? totalAfterDiscount : cart.cartTotal,
+      });
+      setErrorOrder(null);
+      router.push(`/order/${data.data.order_id}`);
+    } catch (error) {
+      setErrorOrder(error.response.data.message);
+    }
+  };
 
   return (
     <div className={styles.summary}>
@@ -67,7 +88,7 @@ export default function Summary({
                 <span>
                   Total : <b>CAD {cart.cartTotal}$</b>
                 </span>
-                {discount && (
+                {discount > 0 && (
                   <span className={styles.discount}>
                     Coupon applied : <b>-{discount}%</b>
                   </span>
@@ -84,9 +105,10 @@ export default function Summary({
           )}
         </Formik>
       </div>
-      <button className={styles.submit_btn} onClick={() => placeOrderHandler}>
+      <button className={styles.submit_btn} onClick={() => placeOrderHandler()}>
         Place Order
       </button>
+      {errorOrder && <p className={styles.error}>{errorOrder}</p>}
     </div>
   );
 }

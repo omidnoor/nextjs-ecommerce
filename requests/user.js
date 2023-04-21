@@ -7,7 +7,8 @@ export const saveCart = async (cart) => {
     });
     return data;
   } catch (error) {
-    return error.message;
+    const errorMessage = error.response?.data?.message || "An error occurred.";
+    return { errorMessage };
   }
 };
 
@@ -18,7 +19,8 @@ export const saveAddress = async (address) => {
     });
     return data;
   } catch (error) {
-    return error.message;
+    const errorMessage = error.response?.data?.message || "An error occurred.";
+    return { errorMessage };
   }
 };
 
@@ -29,7 +31,8 @@ export const changeActive = async (id) => {
     });
     return data;
   } catch (error) {
-    return error.message;
+    const errorMessage = error.response?.data?.message || "An error occurred.";
+    return { errorMessage };
   }
 };
 
@@ -40,7 +43,8 @@ export const deleteAddress = async (id) => {
     });
     return data;
   } catch (error) {
-    return error.message;
+    const errorMessage = error.response?.data?.message || "An error occurred.";
+    return { errorMessage };
   }
 };
 
