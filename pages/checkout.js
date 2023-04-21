@@ -8,10 +8,12 @@ import db from "@/utils/db";
 import Header from "@/components/cart/header";
 import Shipping from "@/components/checkout/shipping";
 import Products from "@/components/checkout/products";
+import Payment from "@/components/checkout/payment";
 
 import styles from "../styles/checkout.module.scss";
 
 export default function checkout({ cart, user }) {
+  const [paymentMethod, setPaymentMethod] = useState("");
   return (
     <>
       <Header />
@@ -20,6 +22,10 @@ export default function checkout({ cart, user }) {
           <Shipping user={user} />
           <Products cart={cart} />
         </div>
+        <Payment
+          paymentMethod={paymentMethod}
+          setPaymentMethod={setPaymentMethod}
+        />
       </div>
     </>
   );

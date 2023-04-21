@@ -1,7 +1,6 @@
 import styles from "./styles.module.scss";
 
 export default function Products({ cart }) {
-  console.log(cart);
   return (
     <div className={styles.products}>
       <div className={styles.products__header}>
