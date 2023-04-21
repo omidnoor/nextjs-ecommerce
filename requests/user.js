@@ -43,3 +43,17 @@ export const deleteAddress = async (id) => {
     return error.message;
   }
 };
+
+export const applyCoupon = async (coupon) => {
+  try {
+    const { data } = await axios.post("/api/user/applyCoupon", {
+      coupon,
+    });
+    return { ...data, success: true };
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      "An error occurred while applying the coupon. Please try again later.";
+    return { success: false, errorMessage };
+  }
+};
