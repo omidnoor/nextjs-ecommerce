@@ -50,7 +50,7 @@ export default function Summary({
                 <span>
                   Total : <b>CAD {cart.cartTotal}$</b>
                 </span>
-                {discount && (
+                {discount != 0 && (
                   <span>
                     Coupon applied : <b>-{discount}%</b>
                   </span>
