@@ -69,10 +69,9 @@ const validate = Yup.object({
   country: Yup.string().required("Country is required."),
 });
 
-export default function Shipping({ user }) {
+export default function Shipping({ user, addresses, setAddresses }) {
   const [shipping, setShipping] = useState(initialValues);
   const [visible, setVisible] = useState(!user?.address.length);
-  const [addresses, setAddresses] = useState(user?.address || []);
   const {
     firstName,
     lastName,

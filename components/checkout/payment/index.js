@@ -22,7 +22,7 @@ export default function Payment({ paymentMethod, setPaymentMethod }) {
             type="radio"
             name="payment"
             id={pm.id}
-            checked={paymentMethod === pm.id}
+            defaultChecked={paymentMethod === pm.id}
           />
           <img src={`/images/checkout/${pm.id}.webp`} alt={pm.name} />
           <div className={styles.payment__item__col}>

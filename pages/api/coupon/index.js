@@ -37,22 +37,3 @@ handler.post(async (req, res) => {
 });
 
 export default handler;
-
-// import nc from "next-connect";
-// import User from "../../../models/User";
-// import Coupon from "../../../models/Coupon";
-// import db from "../../../utils/db";
-// import auth from "../../../middleware/auth";
-// const handler = nc();
-
-//     db.disconnectDb();
-//     return res.json({
-//       message: "Coupon created successfully !",
-//       coupons: await Coupon.find({}),
-//     });
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// });
-
-// export default handler;
