@@ -14,10 +14,12 @@ handler.post(async (req, res) => {
     const { coupon } = req.body;
     const user = await User.findById(req.user);
     const checkCoupon = await Coupon.findOne({ coupon });
-    if (checkCoupon) {
-      return res.json({ message: "Invalid Coupon" });
+    if (!checkCoupon) {
+      return res
+        .status(400)
+        .json({ message: "Invalid Coupon", success: false });
     }
-    const { cartTotal } = Cart.findOne({ user: req.user });
+    const { cartTotal } = await Cart.findOne({ user: req.user });
     let totalAfterDiscount =
       cartTotal - (cartTotal * checkCoupon.discount) / 100;
 
@@ -26,15 +28,17 @@ handler.post(async (req, res) => {
       { totalAfterDiscount },
       { new: true },
     );
-    res.json({
+    res.status(200).json({
       message: "Discount applied",
       totalAfterDiscount,
       discount: checkCoupon.discount,
+      success: true,
     });
   } catch (error) {
     res.status(500).json({
       message:
         "An error occurred while applying the coupon. Please try again later.",
+      success: false,
     });
   } finally {
     db.disconnectDb();

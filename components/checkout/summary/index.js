@@ -29,6 +29,7 @@ export default function Summary({
       setDiscount(res.discount);
       setError(null);
       formik.setFieldError("coupon", "");
+      console.log(res);
     } else {
       setError(res.errorMessage);
       formik.setFieldError("coupon", res.errorMessage);
@@ -71,7 +72,8 @@ export default function Summary({
                   </span>
                 )}
                 {totalAfterDiscount < cart.cartTotal &&
-                  totalAfterDiscount != "" && (
+                  totalAfterDiscount != "" &&
+                  !error && (
                     <span>
                       Total after discount : <b>CAD {totalAfterDiscount}$</b>
                     </span>

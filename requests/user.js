@@ -49,8 +49,11 @@ export const applyCoupon = async (coupon) => {
     const { data } = await axios.post("/api/user/applyCoupon", {
       coupon,
     });
+    // console.log(data);
+
     return { ...data, success: true };
   } catch (error) {
+    console.log(error);
     const errorMessage =
       error.response?.data?.message ||
       "An error occurred while applying the coupon. Please try again later.";
