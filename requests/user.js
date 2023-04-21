@@ -53,7 +53,6 @@ export const applyCoupon = async (coupon) => {
 
     return { ...data, success: true };
   } catch (error) {
-    console.log(error);
     const errorMessage =
       error.response?.data?.message ||
       "An error occurred while applying the coupon. Please try again later.";

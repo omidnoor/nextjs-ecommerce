@@ -29,8 +29,9 @@ export default function Summary({
       setDiscount(res.discount);
       setError(null);
       formik.setFieldError("coupon", "");
-      console.log(res);
+      // console.log(res);
     } else {
+      setDiscount(null);
       setError(res.errorMessage);
       formik.setFieldError("coupon", res.errorMessage);
     }
@@ -66,8 +67,8 @@ export default function Summary({
                 <span>
                   Total : <b>CAD {cart.cartTotal}$</b>
                 </span>
-                {discount != 0 && (
-                  <span>
+                {discount && (
+                  <span className={styles.discount}>
                     Coupon applied : <b>-{discount}%</b>
                   </span>
                 )}
