@@ -37,18 +37,20 @@ export default function checkout({ cart, user }) {
           />
           <Products cart={cart} />
         </div>
-        <Payment
-          paymentMethod={paymentMethod}
-          setPaymentMethod={setPaymentMethod}
-        />
-        <Summary
-          user={user}
-          cart={cart}
-          paymentMethod={paymentMethod}
-          selectedAddress={selectedAddress}
-          totalAfterDiscount={totalAfterDiscount}
-          setTotalAfterDiscount={setTotalAfterDiscount}
-        />
+        <div className="">
+          <Payment
+            paymentMethod={paymentMethod}
+            setPaymentMethod={setPaymentMethod}
+          />
+          <Summary
+            user={user}
+            cart={cart}
+            paymentMethod={paymentMethod}
+            selectedAddress={selectedAddress}
+            totalAfterDiscount={totalAfterDiscount}
+            setTotalAfterDiscount={setTotalAfterDiscount}
+          />
+        </div>
       </div>
     </>
   );
