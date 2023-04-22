@@ -1,4 +1,7 @@
+import { useEffect } from "react";
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { IoIosArrowForward } from "react-icons/io";
+import { useReducer } from "react";
 
 import Footer from "@/components/footer";
 import Header from "@/components/header";
@@ -6,9 +9,83 @@ import Order from "@/models/Order";
 
 import styles from "@/styles/order.module.scss";
 import db from "@/utils/db";
+import User from "@/models/User";
 
-export default function OrderPage({ orderData }) {
-  console.log(orderData);
+function reducer(state, action) {
+  switch (action.type) {
+    case "PAY_REQUEST":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "PAY_DELETE":
+      return {
+        ...state,
+        orderData: action.orderData,
+      };
+    case "PAY_RESET":
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: null,
+      };
+    case "PAY_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case "PAY_FAIL":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+
+export default function OrderPage({ orderData, paypal_client_id }) {
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  const [{ loading, success, error, order }, dispatch] = useReducer(reducer, {
+    loading: true,
+    success: false,
+    order: {},
+    error: null,
+  });
+
+  useEffect(() => {
+    if (!orderData._id || success) {
+      if (success) {
+        dispatch({
+          type: "PAY_RESET",
+          payload: orderData,
+        });
+      }
+    } else {
+      paypalDispatch({
+        type: "resetOptions",
+        value: {
+          "client-id": paypal_client_id,
+          currency: "CAD",
+          intent: "capture",
+        },
+      });
+      paypalDispatch({
+        type: "setLoadingStatus",
+        value: "pending",
+      });
+    }
+  }, [order, success]);
+
+  const createOrderHandler = () => {};
+
+  const onApproveHandler = () => {};
+
+  const onErrorHandler = () => {};
+
   return (
     <div>
       <Header country="Canada" />
@@ -164,6 +241,17 @@ export default function OrderPage({ orderData }) {
                 <span>{orderData.shippingAddress.country}</span>
               </div>
             </div>
+            <div className={styles.order__payment}>
+              {isPending ? (
+                <span>loading...</span>
+              ) : (
+                <PayPalButtons
+                  createOrder={createOrderHandler}
+                  onApprove={onApproveHandler}
+                  onError={onErrorHandler}
+                ></PayPalButtons>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -176,10 +264,16 @@ export async function getServerSideProps(context) {
     await db.connectDb();
     const { query } = context;
     const id = query.id;
-    const order = await Order.findById(id).populate("user").lean();
+    const order = await Order.findById(id)
+      .populate({ path: "user", model: User })
+      .lean();
+
+    const paypal_client_id = process.env.PAYPAL_CLIENT_ID;
+    const paypal_client_secret = process.env.PAYPAL_CLIENT_SECRET;
     return {
       props: {
         orderData: JSON.parse(JSON.stringify(order)),
+        paypal_client_id,
       },
     };
   } catch (error) {
