@@ -112,7 +112,52 @@ export default function OrderPage({ order }) {
               </div>
             </div>
           </div>
-          <div className={styles.order__actions}></div>
+          <div className={styles.order__actions}>
+            <div className={styles.order__address}>
+              <h2>Customer's Order</h2>
+              <div className={styles.order__address__user}>
+                <div className={styles.order__address__user_info}>
+                  <img src={order.user.image} alt={order.user.name} />
+                  <div className={styles.order__address__user_info_inner}>
+                    <span>{order.user.name}</span>
+                    <span>{order.user.email}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.order__address__shipping}>
+                <h3>Shipping Address</h3>
+                <span>
+                  {order.shippingAddress.firstName}{" "}
+                  {order.shippingAddress.lastName}
+                </span>
+                <br />
+                <span>{order.shippingAddress.address1}</span>
+                <span>{order.shippingAddress.address2}</span>
+                <span>
+                  {order.shippingAddress.state}, {order.shippingAddress.city}
+                </span>
+                <span>{order.shippingAddress.zipCode}</span>
+                <span>{order.shippingAddress.country}</span>
+              </div>
+
+              <div className={styles.order__address__billing}>
+                <h3>Billing Address</h3>
+                <span>
+                  {order.shippingAddress.firstName}{" "}
+                  {order.shippingAddress.lastName}
+                </span>
+                <br />
+                <span>{order.shippingAddress.address1}</span>
+                <span>{order.shippingAddress.address2}</span>
+                <span>
+                  {order.shippingAddress.state}, {order.shippingAddress.city}
+                </span>
+                <span>{order.shippingAddress.zipCode}</span>
+                <span>{order.shippingAddress.country}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
