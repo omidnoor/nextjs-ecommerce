@@ -73,13 +73,48 @@ export default function OrderPage({ order }) {
                   </div>
                 </div>
               ))}
+              <div className={styles.order__products__total}>
+                {order.couponApplied ? (
+                  <>
+                    <div className={styles.order__products__total_sub}>
+                      <span>Subtotal</span>
+                      <span>CAD {order.totalBeforeDiscount}$</span>
+                    </div>
+                    <div className={styles.order__products__total_sub}>
+                      <span>
+                        Coupon Applied <em>({order.couponApplied})</em>
+                      </span>
+                      <span>
+                        -{(order.totalBeforeDiscount - order.total).toFixed(2)}$
+                      </span>
+                    </div>
+                    <div className={styles.order__products__total_sub}>
+                      <span>Tax Price</span>
+                      <span>CAD {order.taxPrice}$</span>
+                    </div>
+                    <div className={styles.order__products__total_sub}>
+                      <span>TOTAL TO PAY</span>
+                      <b>CAD {order.total.toFixed(2)}$</b>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles.order__products__total_sub}>
+                      <span>Tax Price</span>
+                      <span>CAD {order.taxPrice}$</span>
+                    </div>
+                    <div className={styles.order__products__total_sub}>
+                      <span>TOTAL TO PAY</span>
+                      <bdo>CAD {order.total.toFixed(2)}$</bdo>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
           <div className={styles.order__actions}></div>
         </div>
       </div>
-
-      {/* <Footer country="Canada" /> */}
     </div>
   );
 }
@@ -90,7 +125,6 @@ export async function getServerSideProps(context) {
     const { query } = context;
     const id = query.id;
     const order = await Order.findById(id).populate("user").lean();
-    console.log(order);
     return {
       props: {
         order: JSON.parse(JSON.stringify(order)),

@@ -85,6 +85,25 @@
         }
       }
     }
+
+    &__total {
+      margin-top: 1rem;
+      &_sub {
+        padding: 5px 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 20px;
+        span {
+          em {
+            color: #4cb64c;
+          }
+        }
+        &:last-of-type {
+          border-top: 1px solid #eee;
+        }
+      }
+    }
   }
 }
 
