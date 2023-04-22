@@ -6,10 +6,11 @@ import { useReducer } from "react";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Order from "@/models/Order";
+import StripePayment from "@/components/payments/stripePayment";
+import User from "@/models/User";
+import db from "@/utils/db";
 
 import styles from "@/styles/order.module.scss";
-import db from "@/utils/db";
-import User from "@/models/User";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -241,17 +242,31 @@ export default function OrderPage({ orderData, paypal_client_id }) {
                 <span>{orderData.shippingAddress.country}</span>
               </div>
             </div>
-            <div className={styles.order__payment}>
-              {isPending ? (
-                <span>loading...</span>
-              ) : (
-                <PayPalButtons
-                  createOrder={createOrderHandler}
-                  onApprove={onApproveHandler}
-                  onError={onErrorHandler}
-                ></PayPalButtons>
-              )}
-            </div>
+            {orderData.paymentMethod === "paypal" && (
+              <div className={styles.order__payment}>
+                {isPending ? (
+                  <span>loading...</span>
+                ) : (
+                  <PayPalButtons
+                    createOrder={createOrderHandler}
+                    onApprove={onApproveHandler}
+                    onError={onErrorHandler}
+                  ></PayPalButtons>
+                )}
+              </div>
+            )}
+            {orderData.paymentMethod === "credit_card" && (
+              <div className={styles.order__payment}>
+                {isPending ? (
+                  <span>loading...</span>
+                ) : (
+                  <StripePayment
+                    total={orderData.total}
+                    order_id={orderData._id}
+                  />
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
