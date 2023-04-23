@@ -1,0 +1,22 @@
+.stripe {
+  button {
+    margin-top: 2rem;
+    height: 45px;
+    width: 100%;
+    background-color: $blue-color;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background-color: transparent;
+      border: 1px solid $blue-color;
+      color: #222;
+    }
+  }
+
+  .error {
+    padding: 0;
+  }
+}

@@ -48,7 +48,11 @@ function reducer(state, action) {
   }
 }
 
-export default function OrderPage({ orderData, paypal_client_id }) {
+export default function OrderPage({
+  orderData,
+  paypal_client_id,
+  stripe_public_key,
+}) {
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const [{ loading, success, error, order }, dispatch] = useReducer(reducer, {
     loading: true,
@@ -263,6 +267,7 @@ export default function OrderPage({ orderData, paypal_client_id }) {
                   <StripePayment
                     total={orderData.total}
                     order_id={orderData._id}
+                    stripe_public_key={stripe_public_key}
                   />
                 )}
               </div>
@@ -285,10 +290,13 @@ export async function getServerSideProps(context) {
 
     const paypal_client_id = process.env.PAYPAL_CLIENT_ID;
     const paypal_client_secret = process.env.PAYPAL_CLIENT_SECRET;
+    const stripe_public_key = process.env.STRIPE_PUBLIC_KEY;
+    const stripe_secret_key = process.env.STRIPE_SECRET_KEY;
     return {
       props: {
         orderData: JSON.parse(JSON.stringify(order)),
         paypal_client_id,
+        stripe_public_key,
       },
     };
   } catch (error) {
