@@ -24,6 +24,7 @@
     "eslint-config-next": "13.2.4",
     "formik": "^2.2.9",
     "googleapis": "^114.0.0",
+    "helmet": "^6.1.5",
     "jsonwebtoken": "^9.0.0",
     "libphonenumber-js": "^1.10.28",
     "mongodb": "^4.1.1",
@@ -46,6 +47,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
     "sass": "^1.60.0",
+    "stripe": "^12.2.0",
     "swiper": "^9.2.0",
     "yup": "^1.1.1"
   }

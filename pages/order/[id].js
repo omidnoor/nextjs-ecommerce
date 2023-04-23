@@ -1,5 +1,9 @@
 import { useEffect } from "react";
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import {
+  FUNDING,
+  PayPalButtons,
+  usePayPalScriptReducer,
+} from "@paypal/react-paypal-js";
 import { IoIosArrowForward } from "react-icons/io";
 import { useReducer } from "react";
 
@@ -37,7 +41,7 @@ function reducer(state, action) {
         loading: false,
         success: true,
       };
-    case "PAY_FAIL":
+    case "PAY_ERROR":
       return {
         ...state,
         loading: false,
@@ -85,11 +89,40 @@ export default function OrderPage({
     }
   }, [order, success]);
 
-  const createOrderHandler = () => {};
+  const createOrderHandler = (data, actions) => {
+    // console.log(actions.order.create);
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            description: "description",
+            amount: {
+              value: orderData.total.toFixed(2),
+            },
+          },
+        ],
+      })
+      .then((order_id) => order_id)
+      .catch((error) => console.log(error));
+  };
+  const onApproveHandler = (data, actions) => {
+    return actions.order.capture().then(async (details) => {
+      try {
+        dispatch({ type: "PAY_REQUEST" });
+        const { data } = await axios.put(`/api/order/${orderData._id}/pay`, {
+          details,
+          order_id: orderData._id,
+        });
+        dispatch({ type: "PAY_SUCCESS", payload: data });
+      } catch (error) {
+        dispatch({ type: "PAY_ERROR", payload: error });
+      }
+    });
+  };
 
-  const onApproveHandler = () => {};
-
-  const onErrorHandler = () => {};
+  const onErrorHandler = (error) => {
+    dispatch({ type: "PAY_ERROR", payload: error });
+  };
 
   return (
     <div>
@@ -246,31 +279,36 @@ export default function OrderPage({
                 <span>{orderData.shippingAddress.country}</span>
               </div>
             </div>
-            {orderData.paymentMethod === "paypal" && (
-              <div className={styles.order__payment}>
-                {isPending ? (
-                  <span>loading...</span>
-                ) : (
-                  <PayPalButtons
-                    createOrder={createOrderHandler}
-                    onApprove={onApproveHandler}
-                    onError={onErrorHandler}
-                  ></PayPalButtons>
+            {!orderData.isPaid && (
+              <>
+                {orderData.paymentMethod === "paypal" && (
+                  <div className={styles.order__payment}>
+                    {isPending ? (
+                      <span>loading...</span>
+                    ) : (
+                      <PayPalButtons
+                        createOrder={createOrderHandler}
+                        onApprove={onApproveHandler}
+                        onError={onErrorHandler}
+                      ></PayPalButtons>
+                    )}
+                  </div>
                 )}
-              </div>
-            )}
-            {orderData.paymentMethod === "credit_card" && (
-              <div className={styles.order__payment}>
-                {isPending ? (
-                  <span>loading...</span>
-                ) : (
-                  <StripePayment
-                    total={orderData.total}
-                    order_id={orderData._id}
-                    stripe_public_key={stripe_public_key}
-                  />
+                {orderData.paymentMethod === "credit_card" && (
+                  <div className={styles.order__payment}>
+                    {isPending ? (
+                      <span>loading...</span>
+                    ) : (
+                      <StripePayment
+                        fundingSource={FUNDING.PAYPAL}
+                        total={orderData.total}
+                        order_id={orderData._id}
+                        stripe_public_key={stripe_public_key}
+                      />
+                    )}
+                  </div>
                 )}
-              </div>
+              </>
             )}
           </div>
         </div>
