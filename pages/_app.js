@@ -28,11 +28,14 @@ export default function App({
     fetchPaypalClientId();
   }, []);
 
+  // const paypal_client_id = process.env.PAYPAL_CLIENT_ID;
   const options = {
     "client-id": paypalClientId,
     currency: "CAD",
     intent: "capture",
   };
+
+  // console.log(options);
 
   return (
     <>
@@ -49,11 +52,11 @@ export default function App({
 
       <SessionProvider session={session}>
         <Provider store={store}>
-          <PayPalScriptProvider options={options}>
-            <PersistGate loading={null} persistor={persistor}>
+          <PersistGate loading={null} persistor={persistor}>
+            <PayPalScriptProvider options={options}>
               <Component {...pageProps} />
-            </PersistGate>
-          </PayPalScriptProvider>
+            </PayPalScriptProvider>
+          </PersistGate>
         </Provider>
       </SessionProvider>
     </>
