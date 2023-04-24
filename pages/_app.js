@@ -7,6 +7,8 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import store from "@/store";
 import "@/styles/globals.scss";
 import Head from "next/head";
+import { useState } from "react";
+import { useEffect } from "react";
 
 let persistor = persistStore(store);
 
@@ -14,8 +16,20 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
+  const [paypalClientId, setPaypalClientId] = useState(null);
+
+  useEffect(() => {
+    const fetchPaypalClientId = async () => {
+      const res = await fetch("/api/get-paypal-client-id");
+      const { paypal_client_id } = await res.json();
+      setPaypalClientId(paypal_client_id);
+    };
+
+    fetchPaypalClientId();
+  }, []);
+
   const options = {
-    "client-id": pageProps.paypal_client_id,
+    "client-id": paypalClientId,
     currency: "CAD",
     intent: "capture",
   };
@@ -44,18 +58,4 @@ export default function App({
       </SessionProvider>
     </>
   );
-}
-
-export async function getServerSideProps(context) {
-  try {
-    const paypal_client_id = process.env.PAYPAL_CLIENT_ID;
-
-    return {
-      props: {
-        paypal_client_id,
-      },
-    };
-  } catch (error) {
-    console.error(error.message);
-  }
 }

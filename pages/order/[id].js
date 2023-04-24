@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {
   FUNDING,
   PayPalButtons,
+  PayPalScriptProvider,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
 import { IoIosArrowForward } from "react-icons/io";
