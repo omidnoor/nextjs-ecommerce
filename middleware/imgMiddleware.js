@@ -4,7 +4,6 @@ export const imgMiddleware = async (req, res, next) => {
     if (!req.files) {
       return res.status(400).json({ message: "No files were choosen." });
     }
-    res.json(req.files);
     let files = Object.values(req.files).flat();
     for (const file of files) {
       //---------------
@@ -32,10 +31,8 @@ export const imgMiddleware = async (req, res, next) => {
     res.status(500).json({ message: error.message });
   }
 };
-
 const removeTmp = (path) => {
-  path &&
-    fs.unlink(path, (err) => {
-      if (err) console.log(err);
-    });
+  fs.unlink(path, (err) => {
+    if (err) throw err;
+  });
 };
