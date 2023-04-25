@@ -1,0 +1,31 @@
+.submit_btn {
+  min-width: 120px;
+  padding: 10px 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+  &__primary {
+    background-color: $blue-color;
+    color: #fff;
+  }
+}
+
+.header {
+  font-weight: 700;
+  font-size: 20;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  .flex {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  span {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+  }
+}
