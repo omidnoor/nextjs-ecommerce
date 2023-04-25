@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import AdminInput from "@/components/inputs/adminInput";
+import { toast } from "react-toastify";
+import axios from "axios";
+
+import "react-toastify/dist/ReactToastify.css";
 
 import styles from "./styles.module.scss";
-import AdminInput from "@/components/inputs/adminInput";
 
-export default function Create() {
+export default function Create({ setCategories }) {
   const [name, setName] = useState("");
 
   const validate = Yup.object().shape({
@@ -13,11 +17,22 @@ export default function Create() {
       .required("Category name is required")
       .min(2, "Category name must be at least 2 characters long")
       .max(30, "Category name must be at most 30 characters long")
-      .matches(/^[aA-zZ]/, "Numbersand special characters are not allowed"),
+      .matches(
+        /^[a-zA-Z\s]*$/,
+        "Numbersand special characters are not allowed",
+      ),
   });
 
   const submitHandler = async () => {
-    console.log(name);
+    try {
+      const { data } = await axios.post("/api/admin/category", {
+        name,
+      });
+      setCategories(data.categories);
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
