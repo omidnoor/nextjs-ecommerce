@@ -1,9 +1,21 @@
+.btn_wrap {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
 .submit_btn {
   min-width: 120px;
   padding: 10px 15px;
   font-weight: 600;
   cursor: pointer;
-  border-radius: 5px;
+  color: #222;
+  transition: all 0.2s;
+  &:hover {
+    color: #fff;
+    background-color: $blue-color;
+  }
+
   &__primary {
     background-color: $blue-color;
     color: #fff;

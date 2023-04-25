@@ -9,7 +9,11 @@ export default function Create() {
   const [name, setName] = useState("");
 
   const validate = Yup.object().shape({
-    name: Yup.string().required("Required"),
+    name: Yup.string()
+      .required("Category name is required")
+      .min(2, "Category name must be at least 2 characters long")
+      .max(30, "Category name must be at most 30 characters long")
+      .matches(/^[aA-zZ]/, "Numbersand special characters are not allowed"),
   });
 
   const submitHandler = async () => {
@@ -34,12 +38,11 @@ export default function Create() {
               placeholder="Category Name"
               onChange={(e) => setName(e.target.value)}
             />
-            <button
-              type="submit"
-              className={`${styles.submit_btn} ${styles.submit_btn__primary}`}
-            >
-              <span>Add Category</span>
-            </button>
+            <div className={styles.btn_wrap}>
+              <button type="submit" className={`${styles.submit_btn} `}>
+                <span>Add Category</span>
+              </button>
+            </div>
           </Form>
         )}
       </Formik>
