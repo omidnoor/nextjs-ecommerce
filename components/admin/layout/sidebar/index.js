@@ -10,13 +10,18 @@ import {
   MdSpaceDashboard,
 } from "react-icons/md";
 import { FcSalesPerformance } from "react-icons/fc";
-import { IoListCircleSharp } from "react-icons/io5";
+import { IoListCircleSharp, IoNotificationsSharp } from "react-icons/io5";
 import { ImUsers } from "react-icons/im";
 import { AiFillMessage } from "react-icons/ai";
 import { FaThList } from "react-icons/fa";
 import { BsPatchPlus } from "react-icons/bs";
 import { TbCategory2 } from "react-icons/tb";
-import { RiCoupon3Fill } from "react-icons/ri";
+import {
+  RiCoupon3Fill,
+  RiLogoutCircleFill,
+  RiLogoutCircleRFill,
+  RiSettingsLine,
+} from "react-icons/ri";
 
 import styles from "./styles.module.scss";
 
@@ -143,6 +148,34 @@ export default function Sidebar() {
             </li>
           </ul>
         </div>
+        <nav>
+          <ul
+            className={`${styles.sidebar__list} ${
+              expand ? styles.nav_flex : ""
+            }`}
+          >
+            <li>
+              <Link href="/admin/dashboard">
+                <RiSettingsLine />
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin/dashboard">
+                <IoNotificationsSharp />
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin/dashboard">
+                <AiFillMessage />
+              </Link>
+            </li>
+            <li>
+              <Link href="/admin/dashboard">
+                <RiLogoutCircleRFill />
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );
