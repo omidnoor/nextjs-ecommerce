@@ -4,6 +4,7 @@ import Layout from "@/components/admin/layout";
 import Category from "@/models/Category";
 import db from "@/utils/db";
 import Create from "@/components/admin/categories/Create";
+import List from "@/components/admin/categories/List";
 
 import styles from "@/styles/dashboard.module.scss";
 
@@ -14,6 +15,7 @@ export default function Categories({ categories }) {
       <Layout>
         <div>
           <Create setCategories={setData} />
+          <List categories={data} setCategories={setData} />
         </div>
       </Layout>
     </div>
