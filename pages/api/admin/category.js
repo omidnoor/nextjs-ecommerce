@@ -19,9 +19,26 @@ handler.post(async (req, res) => {
       name,
       slug: slugify(name),
     }).save();
+
     res.status(200).json({
       message: "Category created",
-      category: await Category.find({}).sort({ updateAt: -1 }),
+      categories: await Category.find({}).sort({ updateAt: -1 }),
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  } finally {
+    await db.disconnectDb();
+  }
+});
+
+handler.delete(async (req, res) => {
+  try {
+    const { id } = req.body;
+    await db.connectDb();
+    await Category.findByIdAndRemove(id);
+    res.status(200).json({
+      message: "Category deleted",
+      categories: await Category.find({}).sort({ updatedAt: -1 }),
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

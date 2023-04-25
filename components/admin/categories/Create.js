@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 import "react-toastify/dist/ReactToastify.css";
-
 import styles from "./styles.module.scss";
 
 export default function Create({ setCategories }) {
@@ -30,6 +29,7 @@ export default function Create({ setCategories }) {
       });
       setCategories(data.categories);
       setName("");
+      console.log("Categories updated in Create:", data.categories);
       toast.success(data.message);
     } catch (error) {
       toast.error(error.response.data.message);
@@ -42,7 +42,7 @@ export default function Create({ setCategories }) {
         enableReinitialize
         initialValues={{ name }}
         validationSchema={validate}
-        onSubmit={() => submitHandler()}
+        onSubmit={submitHandler}
       >
         {(form) => (
           <Form>

@@ -1,15 +1,30 @@
 import { useRef } from "react";
 import { useState } from "react";
-
-import styles from "./styles.module.scss";
+import { toast } from "react-toastify";
 import { AiFillDelete, AiTwotoneEdit } from "react-icons/ai";
+import axios from "axios";
+
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./styles.module.scss";
 
 export default function ListItem({ category, setCategories }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const input = useRef(null);
 
-  const removeHandler = async () => {};
+  const removeHandler = async (id) => {
+    try {
+      const { data } = await axios.delete(`/api/admin/category`, {
+        data: { id },
+      });
+      setCategories(data.categories);
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const updateHandler = async (id) => {};
 
   return (
     <li className={styles.list__item}>
@@ -21,6 +36,25 @@ export default function ListItem({ category, setCategories }) {
         disabled={!open}
         ref={input}
       />
+      {open && (
+        <div className={styles.list__item_expand}>
+          <button
+            onClick={() => updateHandler(category._id)}
+            className={styles.btn}
+          >
+            Save
+          </button>
+          <button
+            onClick={() => {
+              setOpen(false);
+              setName("");
+            }}
+            className={styles.btn}
+          >
+            Cancel
+          </button>
+        </div>
+      )}
       <div className={styles.list__item_action}>
         {!open && (
           <AiTwotoneEdit

@@ -10,11 +10,16 @@ import styles from "@/styles/dashboard.module.scss";
 
 export default function Categories({ categories }) {
   const [data, setData] = useState(categories);
+
+  const handleUpdateCategories = (newCategories) => {
+    setData(newCategories);
+  };
+  console.log(data);
   return (
     <div>
       <Layout>
         <div>
-          <Create setCategories={setData} />
+          <Create setCategories={handleUpdateCategories} />
           <List categories={data} setCategories={setData} />
         </div>
       </Layout>
