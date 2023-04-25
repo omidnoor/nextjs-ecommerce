@@ -24,7 +24,16 @@ export default function ListItem({ category, setCategories }) {
     }
   };
 
-  const updateHandler = async (id) => {};
+  const updateHandler = async (id, name) => {
+    try {
+      const { data } = await axios.put(`/api/admin/category`, { id, name });
+      setCategories(data.categories);
+      setOpen(false);
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   return (
     <li className={styles.list__item}>
@@ -39,7 +48,7 @@ export default function ListItem({ category, setCategories }) {
       {open && (
         <div className={styles.list__item_expand}>
           <button
-            onClick={() => updateHandler(category._id)}
+            onClick={() => updateHandler(category._id, category.name)}
             className={styles.btn}
           >
             Save

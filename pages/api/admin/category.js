@@ -47,4 +47,20 @@ handler.delete(async (req, res) => {
   }
 });
 
+handler.put(async (req, res) => {
+  try {
+    const { id, name } = req.body;
+    await db.connectDb();
+    await Category.findByIdAndUpdate(id, { name });
+    res.status(200).json({
+      message: "Category has been updated",
+      categories: await Category.find({}).sort({ createdAt: -1 }),
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  } finally {
+    await db.disconnectDb();
+  }
+});
+
 export default handler;
