@@ -12,14 +12,16 @@ import styles from "@/styles/dashboard.module.scss";
 export default function SubCategories({ categories, subcategories }) {
   const [data, setData] = useState(subcategories);
 
-  console.log(data);
-
   return (
     <div>
       <Layout>
         <div>
           <Create setSubcategories={setData} categories={categories} />
-          <List subcategories={data} setsubCategories={setData} />
+          <List
+            categories={categories}
+            subcategories={data}
+            setSubcategories={setData}
+          />
         </div>
       </Layout>
     </div>
@@ -30,6 +32,9 @@ export async function getServerSideProps(context) {
   await db.connectDb();
   const categories = await Category.find({}).sort({ updatedAt: -1 }).lean();
   const subcategories = await SubCategory.find({})
+    .populate({ path: "parent", model: "Category" })
+    .sort({ updatedAt: -1 })
+    .lean()
     .sort({ updatedAt: -1 })
     .lean();
   await db.disconnectDb();

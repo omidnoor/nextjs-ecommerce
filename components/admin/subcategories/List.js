@@ -3,16 +3,14 @@ import ListItem from "./ListItem";
 
 import styles from "./styles.module.scss";
 
-export default function List({ categories, setCategories }) {
-  useEffect(() => {
-    console.log("updated list", categories);
-  }, [categories]);
+export default function List({ categories, subcategories, setSubcategories }) {
   return (
     <ul className={styles.list}>
-      {categories?.map((category, index) => (
+      {subcategories?.map((subcategory, index) => (
         <ListItem
-          category={category}
-          setCategories={setCategories}
+          categories={categories}
+          subcategory={subcategory}
+          setSubcategories={setSubcategories}
           key={index}
         />
       ))}

@@ -29,7 +29,7 @@ export default function Create({ setCategories }) {
       });
       setCategories(data.categories);
       setName("");
-      console.log("Categories updated in Create:", data.categories);
+
       toast.success(data.message);
     } catch (error) {
       toast.error(error.response.data.message);

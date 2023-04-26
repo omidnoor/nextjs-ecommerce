@@ -14,7 +14,6 @@ export default function Categories({ categories }) {
   const handleUpdateCategories = (newCategories) => {
     setData(newCategories);
   };
-  console.log(data);
   return (
     <div>
       <Layout>

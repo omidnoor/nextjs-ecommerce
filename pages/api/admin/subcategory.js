@@ -24,7 +24,7 @@ handler.post(async (req, res) => {
 
     res.status(200).json({
       message: "SubCategory has been created",
-      subcategories: await SubCategory.find({}).sort({ updateAt: -1 }),
+      subcategory: await SubCategory.find({}).sort({ updateAt: -1 }),
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -35,12 +35,12 @@ handler.post(async (req, res) => {
 
 handler.delete(async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id, name, parent } = req.body;
     await db.connectDb();
-    await SubCategory.findByIdAndRemove(id);
+    await SubCategory.findByIdAndRemove(id, { name, parent });
     res.status(200).json({
       message: "SubCategory deleted",
-      categories: await Category.find({}).sort({ updatedAt: -1 }),
+      subcategory: await SubCategory.find({}).sort({ updatedAt: -1 }),
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -51,12 +51,16 @@ handler.delete(async (req, res) => {
 
 handler.put(async (req, res) => {
   try {
-    const { id, name } = req.body;
+    const { id, name, parent } = req.body;
     await db.connectDb();
-    await Category.findByIdAndUpdate(id, { name });
+    await SubCategory.findByIdAndUpdate(id, {
+      name,
+      parent,
+      slug: slugify(name),
+    });
     res.status(200).json({
-      message: "Category has been updated",
-      categories: await Category.find({}).sort({ createdAt: -1 }),
+      message: "SubCategory has been updated",
+      subcategory: await SubCategory.find({}).sort({ createdAt: -1 }),
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

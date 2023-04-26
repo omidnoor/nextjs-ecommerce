@@ -12,7 +12,6 @@ import styles from "./styles.module.scss";
 export default function Create({ setSubcategories, categories }) {
   const [name, setName] = useState("");
   const [parent, setParent] = useState("");
-  console.log(parent);
 
   const validate = Yup.object().shape({
     name: Yup.string()
@@ -32,10 +31,9 @@ export default function Create({ setSubcategories, categories }) {
         name,
         parent,
       });
-      setSubcategories(data.subcategories);
+      setSubcategories(data.subcategory);
       setName("");
       setParent("");
-      console.log("Categories updated in Create:", data.categories);
       toast.success(data.message);
     } catch (error) {
       toast.error(error.response.data.message);
