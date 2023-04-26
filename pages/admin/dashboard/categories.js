@@ -6,19 +6,14 @@ import db from "@/utils/db";
 import Create from "@/components/admin/categories/Create";
 import List from "@/components/admin/categories/List";
 
-import styles from "@/styles/dashboard.module.scss";
-
 export default function Categories({ categories }) {
   const [data, setData] = useState(categories);
 
-  const handleUpdateCategories = (newCategories) => {
-    setData(newCategories);
-  };
   return (
     <div>
       <Layout>
         <div>
-          <Create setCategories={handleUpdateCategories} />
+          <Create setCategories={setData} />
           <List categories={data} setCategories={setData} />
         </div>
       </Layout>

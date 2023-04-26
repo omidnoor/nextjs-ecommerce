@@ -8,26 +8,31 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.scss";
 
-export default function Create({ setCategories }) {
+export default function Create({ setCoupons }) {
   const [name, setName] = useState("");
+  const [discount, setDiscount] = useState(0);
 
   const validate = Yup.object().shape({
     name: Yup.string()
-      .required("Category name is required")
-      .min(2, "Category name must be at least 2 characters long")
-      .max(30, "Category name must be at most 30 characters long")
+      .required("Coupon  is required")
+      .min(2, "Coupon must be at least 2 characters long")
+      .max(30, "Coupon must be at most 30 characters long")
       .matches(
         /^[a-zA-Z\s]*$/,
         "Numbersand special characters are not allowed",
       ),
+    discount: Yup.number()
+      .required("Discount is required")
+      .min(1, "Discount must be at least 1%")
+      .max(100, "Discount must be at most 100%"),
   });
 
   const submitHandler = async () => {
     try {
-      const { data } = await axios.post("/api/admin/category", {
+      const { data } = await axios.post("/api/admin/coupon", {
         name,
       });
-      setCategories(data.categories);
+      setCoupons(data.coupons);
       setName("");
       toast.success(data.message);
     } catch (error) {
@@ -39,23 +44,30 @@ export default function Create({ setCategories }) {
     <>
       <Formik
         enableReinitialize
-        initialValues={{ name }}
+        initialValues={{ name, discount }}
         validationSchema={validate}
         onSubmit={submitHandler}
       >
         {(form) => (
           <Form>
-            <div className={styles.header}>Create a Category</div>
+            <div className={styles.header}>Create a Coupon</div>
             <AdminInput
               type="text"
               label="Name"
               name="name"
-              placeholder="Category Name"
+              placeholder="Coupon Name"
               onChange={(e) => setName(e.target.value)}
+            />
+            <AdminInput
+              type="number"
+              label="Discount"
+              name="discount"
+              placeholder="Discount"
+              onChange={(e) => setDiscount(e.target.value)}
             />
             <div className={styles.btn_wrap}>
               <button type="submit" className={`${styles.submit_btn} `}>
-                <span>Add Category</span>
+                <span>Add Coupon</span>
               </button>
             </div>
           </Form>

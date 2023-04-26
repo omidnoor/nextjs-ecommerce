@@ -7,8 +7,6 @@ import Create from "@/components/admin/subcategories/Create";
 import List from "@/components/admin/subcategories/List";
 import SubCategory from "@/models/subCategory";
 
-import styles from "@/styles/dashboard.module.scss";
-
 export default function SubCategories({ categories, subcategories }) {
   const [data, setData] = useState(subcategories);
 

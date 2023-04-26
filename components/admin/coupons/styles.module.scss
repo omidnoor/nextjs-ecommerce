@@ -1,0 +1,61 @@
+@import "../base";
+
+.layout {
+  position: relative;
+
+  &__main {
+    padding: 1rem 2rem;
+    min-height: 100vh;
+    padding-bottom: 5rem;
+  }
+}
+
+.list {
+  margin-top: 1rem;
+
+  &__item {
+    padding: 10px;
+    background-color: $blue-color;
+    margin-top: 10px;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @media (max-with: 800px) {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    svg {
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    input {
+      padding: 1rem;
+      border: none;
+      outline: none;
+      color: #fff;
+      background-color: transparent;
+    }
+
+    &_expand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      button:hover {
+        background-color: $light-blue-color;
+      }
+    }
+  }
+}
+
+.open {
+  background-color: #fff !important;
+  color: #222 !important;
+}
