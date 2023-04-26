@@ -27,14 +27,14 @@ export default function SinglularSelect({
         <MenuItem key={""} value={""}>
           No Selected / Or Empty
         </MenuItem>
-        {data.map((country, index) => (
-          <MenuItem key={index} value={country.name}>
-            {country.name}
+        {data.map((option, index) => (
+          <MenuItem key={index} value={option._id || option.name}>
+            {option.name}
           </MenuItem>
         ))}
       </TextField>
       {meta.touched && meta.error ? (
-        <p className={styles.error_msg}>{meta.error.country}</p>
+        <p className={styles.error_msg}>{meta.error.option}</p>
       ) : null}
     </div>
   );
