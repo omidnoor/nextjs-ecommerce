@@ -3,14 +3,13 @@ import { MenuItem, TextField } from "@mui/material";
 
 import styles from "./styles.module.scss";
 
-export default function SinglularSelect({
+export default function SingularSelect({
   data,
   onChangeHandler,
   placeholder,
   ...rest
 }) {
   const [field, meta] = useField(rest);
-
   return (
     <div style={{ paddingBottom: "16px" }}>
       <TextField

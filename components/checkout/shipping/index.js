@@ -8,12 +8,12 @@ import { CgRemove } from "react-icons/cg";
 
 import { countries } from "@/data/countries";
 import ShippingInput from "@/components/inputs/shippingInputs";
-import SinglularSelect from "@/components/selects/SinglularSelect";
+import SingularSelect from "@/components/selects/SingularSelect";
 import { changeActive, deleteAddress, saveAddress } from "@/requests/user";
 import { GiPhone } from "react-icons/gi";
+import { AiOutlinePlus } from "react-icons/ai";
 
 import styles from "./styles.module.scss";
-import { AiOutlinePlus } from "react-icons/ai";
 
 const initialValues = {
   firstName: "",
@@ -233,7 +233,7 @@ export default function Shipping({ user, addresses, setAddresses }) {
                 onChange={onChangeHandler}
               />
 
-              <SinglularSelect
+              <SingularSelect
                 name="country"
                 value={country}
                 placeholder="Country"

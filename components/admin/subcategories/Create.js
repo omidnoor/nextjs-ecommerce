@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import AdminInput from "@/components/inputs/adminInput";
 import { toast } from "react-toastify";
 import axios from "axios";
-import SinglularSelect from "@/components/selects/SinglularSelect";
+import SingularSelect from "@/components/selects/SingularSelect";
 
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.scss";
@@ -58,7 +58,7 @@ export default function Create({ setSubcategories, categories }) {
               placeholder="SubCategory Name"
               onChange={(e) => setName(e.target.value)}
             />
-            <SinglularSelect
+            <SingularSelect
               name="parent"
               value={parent}
               data={categories}

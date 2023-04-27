@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { AiFillDelete, AiTwotoneEdit } from "react-icons/ai";
 import axios from "axios";
-import SinglularSelect from "@/components/selects/SinglularSelect";
+import SingularSelect from "@/components/selects/SingularSelect";
 
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.scss";
