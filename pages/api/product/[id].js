@@ -10,6 +10,7 @@ handler.get(async (req, res) => {
     const id = req.query.id;
     const style = req.query.style;
     const size = req.query.size;
+    console.log("before fetching product in api");
     const product = await Product.findById(id).lean();
     let discount = product.subProducts[style].discount;
     let priceBefore = product.subProducts[style].sizes[size].price;

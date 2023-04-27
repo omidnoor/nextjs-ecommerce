@@ -102,14 +102,16 @@ export default function Sidebar() {
             <div className={styles.show}>Product</div>
           </div>
           <ul className={styles.sidebar__list}>
-            <li className={route == "product/all" ? styles.active : ""}>
+            <li className={route == "product/allproducts" ? styles.active : ""}>
               <Link href="/admin/dashboard/product/allproducts">
                 <FaThList />
                 <span className={styles.show}>All Products</span>
               </Link>
             </li>
-            <li className={route == "product/create" ? styles.active : ""}>
-              <Link href="/admin/dashboard/product">
+            <li
+              className={route == "product/create-product" ? styles.active : ""}
+            >
+              <Link href="/admin/dashboard/product/create-product">
                 <BsPatchPlus />
                 <span className={styles.show}>Create Product</span>
               </Link>
