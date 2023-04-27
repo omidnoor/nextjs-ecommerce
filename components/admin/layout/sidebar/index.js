@@ -103,7 +103,7 @@ export default function Sidebar() {
           </div>
           <ul className={styles.sidebar__list}>
             <li className={route == "product/all" ? styles.active : ""}>
-              <Link href="/admin/dashboard/product">
+              <Link href="/admin/dashboard/product/allproducts">
                 <FaThList />
                 <span className={styles.show}>All Products</span>
               </Link>
