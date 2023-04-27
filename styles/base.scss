@@ -118,7 +118,8 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
 }
 
 .mainSwiper,
-.offers_swiper {
+.offers_swiper,
+.products__swiper {
   .swiper {
     // border-radius: 10px;
     box-shadow: $shadow-1 !important;
