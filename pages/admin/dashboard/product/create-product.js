@@ -11,6 +11,8 @@ import { Form, Formik } from "formik";
 import SingularSelect from "@/components/selects/SingularSelect";
 
 import styles from "@/styles/products.module.scss";
+import MultipleSelect from "@/components/selects/MultipleSelect";
+import AdminInput from "@/components/inputs/adminInput";
 
 const initialState = {
   name: "",
@@ -65,7 +67,7 @@ export default function CreateProduct({ parents, categories }) {
     const { value, name } = e.target;
     setProduct({ ...product, [name]: value });
   };
-  console.log(product);
+  // console.log(product);
   useEffect(() => {
     const getParent = async () => {
       if (!product.parent) return;
@@ -84,14 +86,13 @@ export default function CreateProduct({ parents, categories }) {
           details: [],
         });
       }
-      console.log("getParent runs");
     };
     getParent();
   }, [product.parent]);
 
   useEffect(() => {
     const getSubs = async () => {
-      const { data } = await axios.get(`/api/admin/subcategory`, {
+      const { data } = await axios.get("/api/admin/subcategory", {
         params: {
           category: product.category,
         },
@@ -137,7 +138,7 @@ export default function CreateProduct({ parents, categories }) {
               setColorImage={setColorImage}
             /> */}
               <div className={styles.flex}>
-                {/* {product.color.image && (
+                {product.color.image && (
                   <img
                     src={product.color.image}
                     alt="product color"
@@ -152,9 +153,10 @@ export default function CreateProduct({ parents, categories }) {
                   >
                     {product.color.color}
                   </span>
-                )} */}
+                )}
+              </div>
 
-                {/* <Colors
+              {/* <Colors
                 name="color"
                 product={product}
                 setProduct={setProduct}
@@ -167,15 +169,102 @@ export default function CreateProduct({ parents, categories }) {
               setProduct={setProduct}
               colorImage={colorImage}
               /> */}
-              </div>
               <SingularSelect
                 name="parent"
                 value={product.parent}
-                placeholder="Parent product"
+                placeholder="Parent Product"
                 data={parents}
                 header="Add to an existing product"
                 onChangeHandler={onChangeHandler}
               />
+
+              <SingularSelect
+                name="category"
+                value={product.category}
+                placeholder="Category"
+                data={categories}
+                header="Category"
+                onChangeHandler={onChangeHandler}
+                disabled={!!product.parent}
+              />
+
+              {product.category && (
+                <MultipleSelect
+                  value={product.subCategories}
+                  data={subs}
+                  header="Sub-Categories"
+                  name="Sub-Categories"
+                  onChangeHandler={onChangeHandler}
+                  disabled={!!product.parent}
+                />
+              )}
+
+              <div className={styles.header}>Basic Info</div>
+              <AdminInput
+                type="text"
+                label="Name"
+                name="name"
+                placeholder="Product Name"
+                onChange={onChangeHandler}
+              />
+              <AdminInput
+                type="text"
+                label="Description"
+                name="description"
+                placeholder="Product Description"
+                onChange={onChangeHandler}
+              />
+              <AdminInput
+                type="text"
+                label="Brand"
+                name="brand"
+                placeholder="Product Brand"
+                onChange={onChangeHandler}
+              />
+              {/* <AdminInput
+                type="text"
+                label="Sku"
+                name="sku"
+                placeholder="Product Sku/Number"
+                onChange={onChangeHandler}
+              /> */}
+              <AdminInput
+                type="text"
+                label="Discount"
+                name="discount"
+                placeholder="Product Discount"
+                onChange={onChangeHandler}
+              />
+              {/* <Images
+              name="imageDescInputFile"
+              header="Product Description Images"
+              text="Add Images"
+              images={descriptionImages}
+              setImages={setDescriptionImages}
+              setColorImage={setColorImage}
+            /> */}
+              {/* <Sizes
+              sizes={product.sizes}
+              product={product}
+              setProduct={setProduct}
+            
+            /> */}
+              {/* <Details
+              details={product.details}
+              product={product}
+              setProduct={setProduct}
+            
+            /> */}
+              {/* <Questions
+              questions={product.questions}
+              product={product}
+              setProduct={setProduct}
+            
+            /> */}
+
+              <button className={styles.btn} type="submit">
+                Create Product
+              </button>
             </Form>
           );
         }}

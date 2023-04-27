@@ -71,14 +71,17 @@ handler.put(async (req, res) => {
 
 handler.get(async (req, res) => {
   try {
-    const { category } = req.body;
+    const { category } = req.query;
     if (!category) {
       res.json([]);
     }
     await db.connectDb();
-    const results = await SubCategory.find({ parent: category }).select("name");
+    const results = await SubCategory.find({ parent: category })
+      .select("name")
+      .lean();
 
-    res.status(200).json(results);
+    // console.log(results);
+    res.json(results);
   } catch (error) {
     res.status(500).json({ message: error.message });
   } finally {

@@ -92,7 +92,7 @@ export default function Shipping({ user, addresses, setAddresses }) {
 
   const saveShippingHandler = async () => {
     const res = await saveAddress(shipping);
-    console.log(res);
+    // console.log(res);
     if (res && res.addresses) {
       setAddresses(res.addresses);
     }

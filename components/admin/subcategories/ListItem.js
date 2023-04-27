@@ -37,12 +37,12 @@ export default function ListItem({
         name: name || subcategory?.name,
         parent: parent || subcategory?.parent._id,
       });
-      console.log("Server response for update:", data);
+      // console.log("Server response for update:", data);
       setSubcategories(data.subcategory);
       setOpen(false);
       toast.success(data?.message);
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       toast.error(error?.response?.data?.message);
     }
   };

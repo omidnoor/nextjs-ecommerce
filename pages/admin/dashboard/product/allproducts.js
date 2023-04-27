@@ -7,7 +7,7 @@ import ProductCard from "@/components/admin/products/productCard";
 import styles from "@/styles/products.module.scss";
 
 export default function allProducts({ products }) {
-  console.log(products);
+  // console.log(products);
   return (
     <Layout>
       <div className={styles.header}>All Products</div>
