@@ -41,4 +41,16 @@
     font-size: 14px;
     font-weight: normal;
   }
+  img {
+    width: 30px;
+  }
+}
+
+.header__error {
+  color: $error-color;
+  border-color: $error-color;
+}
+
+.error__bg {
+  background-color: $error-color !important;
 }

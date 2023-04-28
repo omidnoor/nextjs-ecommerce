@@ -59,15 +59,31 @@ export default function CreateProduct({ parents, categories }) {
   const [descriptionImages, setDescriptionImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const validate = Yup.object();
+  const validate = Yup.object({
+    name: Yup.string()
+      .required("Please add a name")
+      .min(10, "Product name must bewteen 10 and 300 characters.")
+      .max(300, "Product name must bewteen 10 and 300 characters."),
+    brand: Yup.string().required("Please add a brand"),
+    category: Yup.string().required("Please select a category."),
+    /*
+    subCategories: Yup.array().min(
+      1,
+      "Please select atleast one sub Category."
+    ),
+   */
+    // sku: Yup.string().required("Please add a sku/number"),
+    color: Yup.string().required("Please add a color"),
+    description: Yup.string().required("Please add a description"),
+  });
 
   const createProduct = async () => {};
 
   const onChangeHandler = (e) => {
     const { value, name } = e.target;
+
     setProduct({ ...product, [name]: value });
   };
-  // console.log(product);
   useEffect(() => {
     const getParent = async () => {
       if (!product.parent) return;
@@ -183,7 +199,7 @@ export default function CreateProduct({ parents, categories }) {
                 value={product.category}
                 placeholder="Category"
                 data={categories}
-                header="Category"
+                header="Select a category"
                 onChangeHandler={onChangeHandler}
                 disabled={!!product.parent}
               />
@@ -192,8 +208,8 @@ export default function CreateProduct({ parents, categories }) {
                 <MultipleSelect
                   value={product.subCategories}
                   data={subs}
-                  header="Sub-Categories"
-                  name="Sub-Categories"
+                  header="Select Sub Categories"
+                  name="subCategories"
                   onChangeHandler={onChangeHandler}
                   disabled={!!product.parent}
                 />

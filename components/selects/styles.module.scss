@@ -1,13 +1,23 @@
+@import "../admin/base";
 .select {
   width: 100%;
-  //   margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
+  div {
+    div {
+      padding: 1rem;
+    }
+  }
 }
-.error_select {
-  background-color: rgba(255, 0, 0, 0.031);
-  //   border: 1px solid #cc674f !important;
+.error__select {
+  background: rgba(255, 0, 0, 0.031) !important;
+  border: 1px solid #cc674f;
 }
-
-.error_msg {
+.error__msg {
   color: $error-color;
-  font-size: 14px;
+  font-size: 13px;
+}
+.flex {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
 }
