@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  show: "",
+  show: false,
   header: "Error creating product",
   msgs: [
     {
@@ -30,7 +30,7 @@ export const DialogSlice = createSlice({
       state.link = action.payload.link;
     },
     hideDialog: (state, action) => {
-      state.show = fasle;
+      state.show = false;
       state.header = "";
       state.msgs = [];
       state.link = {};

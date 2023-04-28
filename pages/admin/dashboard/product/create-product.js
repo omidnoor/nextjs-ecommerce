@@ -13,6 +13,7 @@ import SingularSelect from "@/components/selects/SingularSelect";
 import styles from "@/styles/products.module.scss";
 import MultipleSelect from "@/components/selects/MultipleSelect";
 import AdminInput from "@/components/inputs/adminInput";
+import DialogModal from "@/components/dialogModal";
 
 const initialState = {
   name: "",
@@ -122,6 +123,7 @@ export default function CreateProduct({ parents, categories }) {
   return (
     <Layout>
       <div className={styles.header}>Create Products</div>
+      <DialogModal />
       <Formik
         enableReinitialize
         initialValues={{

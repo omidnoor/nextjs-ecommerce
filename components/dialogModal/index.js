@@ -12,9 +12,9 @@ import { showDialog, hideDialog } from "@/store/dialogSlice";
 
 import styles from "./styles.module.scss";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="down" ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//   return <Slide direction="down" ref={ref} {...props} in={props.in} />;
+// });
 export default function DialogModal({ type }) {
   const dispatch = useDispatch();
   const { dialog } = useSelector((state) => ({ ...state }));
@@ -32,8 +32,8 @@ export default function DialogModal({ type }) {
       }}
     >
       <Dialog
-        open={dialog.show}
-        TransitionComponent={Transition}
+        open={!!dialog.show}
+        TransitionComponent={Slide}
         keepMounted
         onClose={handleClose}
         disableScrollLock={true}
