@@ -14,6 +14,7 @@ import styles from "@/styles/products.module.scss";
 import MultipleSelect from "@/components/selects/MultipleSelect";
 import AdminInput from "@/components/inputs/adminInput";
 import DialogModal from "@/components/dialogModal";
+import Images from "@/components/admin/createProduct/images";
 
 const initialState = {
   name: "",
@@ -147,14 +148,14 @@ export default function CreateProduct({ parents, categories }) {
         {(formik) => {
           return (
             <Form>
-              {/* <Images
-              name="imageInputFile"
-              header="Product Images"
-              text="Add Images"
-              images={images}
-              setImages={setImages}
-              setColorImage={setColorImage}
-            /> */}
+              <Images
+                name="imageInputFile"
+                header="Product Images"
+                text="Add Images"
+                images={images}
+                setImages={setImages}
+                setColorImage={setColorImage}
+              />
               <div className={styles.flex}>
                 {product.color.image && (
                   <img
