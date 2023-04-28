@@ -22,7 +22,7 @@ export default function Images({
   const onImageHandler = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img, index) => {
-      if (index > 4 || images.length > 5) {
+      if (index > 5 || images.length > 5) {
         dispatch(
           showDialog({
             header: "Maximum 6 images are allowed",
@@ -78,6 +78,10 @@ export default function Images({
     });
   };
 
+  const onRemoveHandler = (img) => {
+    setImages((images) => images.filter((item) => item !== img));
+  };
+
   return (
     <div className={styles.images}>
       <div
@@ -87,6 +91,7 @@ export default function Images({
           {meta.error && meta.error[name] && (
             <img src="/images/warning.png" alt="warning" />
           )}
+          {header}
         </div>
         <span>
           {meta.touched && meta.error && (
@@ -131,7 +136,7 @@ export default function Images({
                 <img key={index} src={img} alt="image" />
                 <div className={styles.images__main_grid_actions}>
                   <button>
-                    <RiDeleteBin7Fill />
+                    <RiDeleteBin7Fill onClick={() => onRemoveHandler(img)} />
                   </button>
                   <button>
                     <GiExtractionOrb />
