@@ -3,6 +3,8 @@ import styles from "./styles.module.scss";
 import { useRef } from "react";
 import { ErrorMessage, useField } from "formik";
 import { showDialog } from "@/store/dialogSlice";
+import { RiDeleteBin7Fill, RiShape2Line } from "react-icons/ri";
+import { GiExtractionOrb } from "react-icons/gi";
 
 export default function Images({
   images,
@@ -16,11 +18,11 @@ export default function Images({
   const dispatch = useDispatch();
   const fileInput = useRef(null);
   const [meta, field] = useField(props);
-
+  console.log(images);
   const onImageHandler = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img, index) => {
-      if (index === 5 || images.length === 6) {
+      if (index > 4 || images.length > 5) {
         dispatch(
           showDialog({
             header: "Maximum 6 images are allowed",
@@ -33,8 +35,7 @@ export default function Images({
           }),
         );
         return;
-      }
-      if (
+      } else if (
         img.type !== "image/jpeg" &&
         img.type !== "image/jpg" &&
         img.type !== "image/png" &&
@@ -53,6 +54,26 @@ export default function Images({
         );
         files = files.filter((item) => item !== img.name);
         return;
+      } else if (img.size > 1024 * 1024) {
+        dispatch(
+          showDialog({
+            header: "File too large",
+            msgs: [
+              {
+                type: "error",
+                msg: "File too large. Maximum 1Mb",
+              },
+            ],
+          }),
+        );
+        files = files.filter((item) => item !== img.name);
+        return;
+      } else {
+        const reader = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onload = (e) => {
+          setImages((prev) => [...prev, e.target.result]);
+        };
       }
     });
   };
@@ -85,6 +106,45 @@ export default function Images({
         accept="images/jpeg,images/jpg,image/png,image/webp"
         onChange={onImageHandler}
       />
+      <div className={styles.images__main}>
+        <div
+          className={`${styles.images__main_grid} ${
+            images.length === 2
+              ? styles.grid__two
+              : images.length === 3
+              ? styles.grid__three
+              : images.length === 4
+              ? styles.grid__four
+              : images.length === 5
+              ? styles.grid__five
+              : images.length === 6
+              ? styles.grid__six
+              : ""
+          }`}
+        >
+          {!images.length ? (
+            <img src="/images/no_image.png" alt="no image" />
+          ) : (
+            images.map((img, index) => (
+              <div className={styles.images__main_grid_wrap}>
+                <div className={styles.blur}></div>
+                <img key={index} src={img} alt="image" />
+                <div className={styles.images__main_grid_actions}>
+                  <button>
+                    <RiDeleteBin7Fill />
+                  </button>
+                  <button>
+                    <GiExtractionOrb />
+                  </button>
+                  <button>
+                    <RiShape2Line />
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
       <button
         type="reset"
         disabled={images.length === 6}
