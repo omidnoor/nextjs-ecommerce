@@ -17,6 +17,7 @@ import DialogModal from "@/components/dialogModal";
 import Images from "@/components/admin/createProduct/images";
 import Colors from "@/components/admin/createProduct/colors";
 import Style from "@/components/admin/createProduct/style";
+import Sizes from "@/components/admin/createProduct/clickToAdd/sizes";
 
 const initialState = {
   name: "",
@@ -264,12 +265,11 @@ export default function CreateProduct({ parents, categories }) {
               setImages={setDescriptionImages}
               setColorImage={setColorImage}
             /> */}
-              {/* <Sizes
-              sizes={product.sizes}
-              product={product}
-              setProduct={setProduct}
-            
-            /> */}
+              <Sizes
+                sizes={product.sizes}
+                product={product}
+                setProduct={setProduct}
+              />
               {/* <Details
               details={product.details}
               product={product}

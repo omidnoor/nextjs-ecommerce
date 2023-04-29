@@ -15,7 +15,7 @@ export default function Style({
 }) {
   const dispatch = useDispatch();
   const fileInput = useRef(null);
-  const [meta, field] = useField(props);
+  const [meta, field] = useField({ ...props, name });
   const handleImage = (e) => {
     let img = e.target.files[0];
     if (
