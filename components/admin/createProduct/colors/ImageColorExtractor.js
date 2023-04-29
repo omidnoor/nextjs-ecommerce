@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-const ColorThief = require("color-thief");
+// const ColorThief = require("color-thief");
 
 const ImageColorExtractor = ({ imageUrl }) => {
   const imgRef = useRef(null);

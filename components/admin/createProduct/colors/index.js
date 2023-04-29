@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ErrorMessage, useField } from "formik";
 import styles from "./styles.module.scss";
 import { TbArrowUpRightCircle } from "react-icons/tb";
-import ImageColorExtractor from "./ImageColorExtractor";
+// import ImageColorExtractor from "./ImageColorExtractor";
 
 export default function Colors({
   product,
@@ -32,14 +32,6 @@ export default function Colors({
       </div>
     ));
   };
-
-  ColorThief.getColor(colorImage)
-    .then((color) => {
-      console.log(color);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 
   return (
     <div className={styles.colors}>
@@ -79,9 +71,9 @@ export default function Colors({
           style={{ transform: `${toggle ? "rotate(180deg)" : ""}` }}
         />
       )}
-      <div>
+      {/* <div>
         <ImageColorExtractor imageUrl="images/ad.jpg" />
-      </div>
+      </div> */}
     </div>
   );
 }

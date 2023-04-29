@@ -17,8 +17,7 @@ export default function Images({
 }) {
   const dispatch = useDispatch();
   const fileInput = useRef(null);
-  const [meta, field] = useField(props);
-  console.log(images);
+  const [meta, field] = useField({ ...props, name });
   const onImageHandler = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img, index) => {
