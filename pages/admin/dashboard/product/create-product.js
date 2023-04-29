@@ -15,6 +15,7 @@ import MultipleSelect from "@/components/selects/MultipleSelect";
 import AdminInput from "@/components/inputs/adminInput";
 import DialogModal from "@/components/dialogModal";
 import Images from "@/components/admin/createProduct/images";
+import Colors from "@/components/admin/createProduct/colors";
 
 const initialState = {
   name: "",
@@ -175,14 +176,14 @@ export default function CreateProduct({ parents, categories }) {
                 )}
               </div>
 
-              {/* <Colors
+              <Colors
                 name="color"
                 product={product}
                 setProduct={setProduct}
                 colorImage={colorImage}
               />
 
-              <Style 
+              {/* <Style 
               name="styleInput"
               product={product}
               setProduct={setProduct}

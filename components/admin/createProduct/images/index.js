@@ -139,7 +139,7 @@ export default function Images({
                     <RiDeleteBin7Fill onClick={() => onRemoveHandler(img)} />
                   </button>
                   <button>
-                    <GiExtractionOrb />
+                    <GiExtractionOrb onClick={() => setColorImage(img)} />
                   </button>
                   <button>
                     <RiShape2Line />
