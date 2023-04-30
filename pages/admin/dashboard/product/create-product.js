@@ -18,6 +18,8 @@ import Images from "@/components/admin/createProduct/images";
 import Colors from "@/components/admin/createProduct/colors";
 import Style from "@/components/admin/createProduct/style";
 import Sizes from "@/components/admin/createProduct/clickToAdd/sizes";
+import Details from "@/components/admin/createProduct/clickToAdd/details";
+import Questions from "@/components/admin/createProduct/clickToAdd/questions";
 
 const initialState = {
   name: "",
@@ -270,18 +272,16 @@ export default function CreateProduct({ parents, categories }) {
                 product={product}
                 setProduct={setProduct}
               />
-              {/* <Details
-              details={product.details}
-              product={product}
-              setProduct={setProduct}
-            
-            /> */}
-              {/* <Questions
-              questions={product.questions}
-              product={product}
-              setProduct={setProduct}
-            
-            /> */}
+              <Details
+                details={product.details}
+                product={product}
+                setProduct={setProduct}
+              />
+              <Questions
+                questions={product.questions}
+                product={product}
+                setProduct={setProduct}
+              />
 
               <button className={styles.btn} type="submit">
                 Create Product
